@@ -43,14 +43,14 @@ export default function LeaveRequest() {
                     </Typography>
                 </div>
                 <div>
-                <IconButton onClick={handleOpen} style={{ width: '25px', height: '25px', marginRight: '10px' }}>{<Add style={{ color: '#6792ef' }} />}</IconButton>
-                    <IconButton style={{width:'25px', height:'25px'}}>{<SettingsBackupRestoreIcon style={{color:'#6792ef'}} />}</IconButton>
+                    <IconButton onClick={handleOpen} style={{ width: '25px', height: '25px', marginRight: '10px' }}>{<Add style={{ color: '#6792ef' }} />}</IconButton>
+                    <IconButton style={{ width: '25px', height: '25px' }}>{<SettingsBackupRestoreIcon style={{ color: '#6792ef' }} />}</IconButton>
                 </div>
             </div>
 
-            <div style={{justifyContent:'center', marginBlockStart:'5%', alignItems:'center',textAlign:'center'}}>
-                <DraftsIcon style={{color:'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }}/>
-                <p style={{color:'darkgray'}}>No Pending Leave Requests</p>
+            <div style={{ justifyContent: 'center', marginBlockStart: '5%', alignItems: 'center', textAlign: 'center' }}>
+                <DraftsIcon style={{ color: 'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }} />
+                <p style={{ color: 'darkgray' }}>No Pending Leave Requests</p>
             </div>
 
             <Modal
@@ -67,11 +67,11 @@ export default function LeaveRequest() {
             >
                 <Fade in={open}>
                     <div className={classes.paper}>
-                        <Typography variant='h5' style={{color:'#6792ef', marginBottom: '20px', justifyContent: 'center', display: 'flex' }}>
+                        <Typography variant='h5' style={{ color: '#6792ef', marginBottom: '20px', justifyContent: 'center', display: 'flex' }}>
                             Add New Leave
                         </Typography>
-                        <div style={{display:'inline-flex', paddingInline:'60px'}}>
-                            <TextareaAutosize minRows={4} style={{minWidth:'400px'}} />
+                        <div style={{ display: 'inline-flex', paddingInline: '60px' }}>
+                            <TextareaAutosize minRows={4} style={{ minWidth: '400px' }} />
                             {/* <Button style={{marginBlockEnd:'60px'}}>Add</Button> */}
                             <IconButton style={{ width: '50px', marginLeft: '20px', height: '50px', marginBlockEnd: '60px' }}>{<Add width='50' style={{ color: '#6792ef', fontSize: '60px' }} />}</IconButton>
                         </div>

@@ -3,7 +3,7 @@ require('mongoose-double')(mongoose);
 
 
 var SchemaTypes = mongoose.Schema.Types;
-const staffSchema = new mongoose.Schema({
+const clientSchema = new mongoose.Schema({
     firstName: {
         type: String
     },
@@ -63,4 +63,4 @@ const staffSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('staff', staffSchema);
+module.exports = mongoose.model('client', clientSchema);

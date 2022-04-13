@@ -138,10 +138,10 @@ p {
 }
 
 .card-container {
-	background-color: #2e4289aa;
+	background-color: #051963aa;
 	border-radius: 5px;
-	box-shadow: 0px 10px 20px -10px rgba(84, 106, 220, 0.75);
-	color: #B3B8CD;
+	box-shadow: 0px 10px 20px -10px rgba(20, 49, 193, 0.873);
+	color: #fafafa;
 	padding-top: 30px;
 	position: relative;
 	width: 350px;
@@ -179,7 +179,7 @@ button.primary {
 
 button.primary.ghost {
 	background-color: transparent;
-	color: #02899C;
+	color: #eaf1f1;
 }
 
 .skills {

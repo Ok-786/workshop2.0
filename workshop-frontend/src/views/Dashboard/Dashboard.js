@@ -8,7 +8,7 @@ import Calander from '../../components/Calander/Calander';
 import MyAccount from '../MyAccount/MyAccount';
 import Map from '../../components/Map/Map';
 import Shop from '../../components/Shop/Shop';
-import Clients from '../../components/Client/Clients';
+import ClientsMultitabs from '../../components/ClientsMultitabs/Multitabs';
 import Multitabs from '../../components/EmployeeMultitabs/Multitabs';
 
 export default function Dashboard() {
@@ -34,7 +34,7 @@ export default function Dashboard() {
                 myaccount={<MyAccount />}
                 map={<Map />}
                 shop={<Shop />}
-                client={<Clients />}
+                client={<ClientsMultitabs />}
                 employee={<Multitabs />}
 
             />
