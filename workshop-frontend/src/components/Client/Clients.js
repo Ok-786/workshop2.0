@@ -10,6 +10,7 @@ import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { IconButton } from "@material-ui/core";
 
 
 const useStyles = makeStyles({
@@ -38,6 +39,40 @@ export default function Clients() {
         callApi();
     }, [])
 
+    const deleteHandler = async (email) => {
+        var parseRes;
+        try {
+            console.log('dsfsfsfsf')
+            const response = await fetch('http://localhost:8000/api/auth/client/delete', {
+                headers: {
+                    'token': localStorage.token,
+                    'email': email
+                },
+                method: 'DELETE'
+
+            });
+
+            parseRes = await response.json();
+            console.log(parseRes)
+        } catch (err) {
+            console.log(err);
+        }
+
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/client/', {
+                headers: { token: localStorage.token }
+            });
+
+            const parseRes = await response.json();
+            console.log('hereeererererererer')
+            console.log(parseRes)
+            setRows(parseRes.client);
+            setData(parseRes.client);
+
+        }
+        callApi();
+    }
+    
     const [searched, setSearched] = useState("");
     const classes = useStyles();
 
@@ -83,8 +118,8 @@ export default function Clients() {
                                 <TableCell align="left" style={{ color: '#80a4f1' }}>{row.phoneNumber}</TableCell>
                                 <TableCell align="left" style={{ color: '#80a4f1' }}>{row.idNumber}</TableCell>
                                 <TableCell align="left" style={{ color: '#80a4f1' }}>{row.operationalArea}</TableCell>
-                                <TableCell width={1} align="left" ><EditIcon style={{ color: '#00dff1' }} /></TableCell>
-                                <TableCell align="left"><DeleteIcon style={{ color: 'red' }} /></TableCell>
+                                <TableCell width={1} align="left" style={{ cursor: 'pointer' }} ><IconButton ><EditIcon style={{ color: '#00dff1' }} /></IconButton></TableCell>
+                                <TableCell align="left"><IconButton><DeleteIcon onClick={() => deleteHandler(row.email)} style={{ color: 'red', cursor: 'pointer' }} /></IconButton></TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
