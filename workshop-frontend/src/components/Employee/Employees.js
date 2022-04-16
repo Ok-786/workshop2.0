@@ -123,7 +123,7 @@ export default function Employees() {
         console.log('enddd')
         var response;
         async function callApi() {
-             response = await fetch('http://localhost:8000/api/auth/staff/', {
+            response = await fetch('http://localhost:8000/api/auth/staff/', {
                 headers: { token: localStorage.token }
             });
 
@@ -254,7 +254,7 @@ export default function Employees() {
                                         </div>
                                         <div class="item">
                                             <label for="address">Email Address<span>*</span></label>
-                                            <input id="address" type="text" name="address" value={employee.email} onChange={handleChange} />
+                                            <input id="address" type="text" name="email" value={employee.email} onChange={handleChange} />
                                         </div>
                                         <div class="item">
                                             <label for="phoneNumber">phone Number</label>
@@ -274,7 +274,7 @@ export default function Employees() {
                                         </div>
                                         <div class="item">
                                             <label for="country">Country</label>
-                                            <input id="country" type="text" name="text" value={employee.country} onChange={handleChange} />
+                                            <input id="country" type="text" name="country" value={employee.country} onChange={handleChange} />
                                         </div>
                                     </div>
                                 </fieldset>
