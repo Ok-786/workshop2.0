@@ -1,3 +1,4 @@
+const fs = require('fs');
 const pool = require("../config");
 const bcrypt = require("bcrypt");
 const jwt = require(`jsonwebtoken`);
@@ -55,7 +56,7 @@ module.exports.createAdmin = async (req, res) => {
 
             // const newAdmin = await pool.query(`UPDATE users SET temporaryToken=$1 WHERE user_id=$2 RETURNING *`, [expTimeToken, existingAdmin.rows[0].user_id]);
             try {
-                // tempPlace = await Place.findById(id);
+                // tempstaff = await staff.findById(id);
                 const updatedUser = await User.findByIdAndUpdate(user.id, {
                     expTimeToken: expTimeToken
                 }, { new: true });
@@ -177,15 +178,15 @@ module.exports.addProduct = async (req, res) => {
     }
 
     if (!user) {
-        
+
         return res.status(500).json('User not foundaaa!')
     }
-    
+
     try {
         const sess = await mongoose.startSession();
         sess.startTransaction();
         await product.save({ session: sess });
-        user.products.push(product); //this push is the method of mongoose not array, it takes the id from the place and stores it in user
+        user.products.push(product); //this push is the method of mongoose not array, it takes the id from the staff and stores it in user
         await user.save({ session: sess });
         console.log("im a not found")
         await sess.commitTransaction();
@@ -224,7 +225,7 @@ module.exports.addProduct = async (req, res) => {
     //     const sess = await mongoose.startSession();
     //     sess.startTransaction();
     //     await product.save({ session: sess });
-    //     user.products.push(product); //this push is the method of mongoose not array, it takes the id from the place and stores it in user
+    //     user.products.push(product); //this push is the method of mongoose not array, it takes the id from the staff and stores it in user
     //     await user.save({ session: sess });
     //     await sess.commitTransaction();
     // } catch (error) {
@@ -240,6 +241,7 @@ module.exports.addProduct = async (req, res) => {
     // return res.json({ p: "Product Added" });
 };
 module.exports.addStaff = async (req, res) => {
+    console.log("mmmmmmmmmmm" + req.user.id)
     // const { error } = validateProduct(req.body);
     // if (error) {
     //     var e = "";
@@ -282,7 +284,8 @@ module.exports.addStaff = async (req, res) => {
         skills,
         phoneNumber,
         additionalDetails,
-        image: req.file.path
+        image: req.file.path,
+        creator: req.user.id
     })
 
     var user;
@@ -306,13 +309,12 @@ module.exports.addStaff = async (req, res) => {
         sess.startTransaction();
         await staff.save({ session: sess });
         user.staff.push(staff);
-        console.log("aaaaaaaaaaaaaaaaaaaaa") //this push is the method of mongoose not array, it takes the id from the place and stores it in user
-        try {
-            await user.save({ session: sess });
-            await sess.commitTransaction();
-        } catch (err) {
-            console.log(err.message)
-        }
+        console.log("aaaaaaaaaaaaaaaaaaaaa") //this push is the method of mongoose not array, it takes the id from the staff and stores it in user
+
+        await user.save({ session: sess });
+        await sess.commitTransaction();
+        console.log("aaaaaaaaaaaaaaaaaaaaahh")
+
     } catch (error) {
         return res.status(500).json(error.message);
     }
@@ -347,7 +349,7 @@ module.exports.addStaff = async (req, res) => {
     //     const sess = await mongoose.startSession();
     //     sess.startTransaction();
     //     await product.save({ session: sess });
-    //     user.products.push(product); //this push is the method of mongoose not array, it takes the id from the place and stores it in user
+    //     user.products.push(product); //this push is the method of mongoose not array, it takes the id from the staff and stores it in user
     //     await user.save({ session: sess });
     //     await sess.commitTransaction();
     // } catch (error) {
@@ -363,6 +365,36 @@ module.exports.addStaff = async (req, res) => {
     // return res.json({ p: "Product Added" });
 };
 
+
+module.exports.updateStaff = async (req, res) => {
+    var obj = {
+        firstName: await req.header('firstName'),
+        lastName: await req.header('lastName'),
+        email: await req.header('email'),
+        address: await req.header('address'),
+        operationalArea: await req.header('operationalArea'),
+        idNumber: await req.header('idNumber'),
+        education: await req.header('education'),
+        country: await req.header('country'),
+        state: await req.header('state'),
+        experience: await req.header('experience'),
+        skills: await req.header('skills'),
+        phoneNumber: await req.header('phoneNumber'),
+        additionalDetails: await req.header('additionalDetails'),
+    }
+    
+    let id= await req.header('id');
+    console.log(obj);
+    var user1 = null;
+    try {
+        // user = await User.
+        user1 = await Staff.findByIdAndUpdate(id, obj, { new: true })
+        console.log(user1)
+        return res.json('User Updated');
+    } catch (err) {
+        return res.json('Could not find user!');
+    }
+}
 
 
 module.exports.addClient = async (req, res) => {
@@ -408,7 +440,8 @@ module.exports.addClient = async (req, res) => {
         skills,
         phoneNumber,
         additionalDetails,
-        image: req.file.path
+        image: req.file.path,
+        creator: req.user.id
     })
 
     var user;
@@ -434,7 +467,7 @@ module.exports.addClient = async (req, res) => {
         console.log(client)
         user.client.push(client);
         console.log('done')
-        console.log("aaaaaaaaaaaaaaaaaaaaa") //this push is the method of mongoose not array, it takes the id from the place and stores it in user
+        console.log("aaaaaaaaaaaaaaaaaaaaa") //this push is the method of mongoose not array, it takes the id from the staff and stores it in user
         try {
             await user.save({ session: sess });
             await sess.commitTransaction();
@@ -452,7 +485,7 @@ module.exports.addClient = async (req, res) => {
     //     return res.status(500).json(err.message)
     // }
     return res.json("Client Created");
-    
+
 };
 
 
@@ -475,13 +508,12 @@ module.exports.getProducts = async (req, res) => {
 
 module.exports.getStaff = async (req, res) => {
     console.log('llolollo')
-    var products;
     try {
         userWithStaff = await User.findById(req.user.id).populate('staff');
-        console.log({staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) })
-        console.log({staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) })
+        console.log({ staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) })
+        console.log({ staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) })
         return res.json({ staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) });
-        
+
     } catch (err) {
         return res.status(500).json(err.message);
     }
@@ -493,14 +525,77 @@ module.exports.getStaff = async (req, res) => {
     // }
 }
 
+
+module.exports.deleteClient = async (req, res) => {
+    var email = req.header('email');
+    console.log('isWorking' + email);
+    let staff;
+    try {
+        staff = await (await Client.findOne({ email: email })).populate('creator')
+        // console.log(staff)
+        // delete = await User.deleteOne(where)
+    } catch (err) {
+        console.log(err.message)
+    }
+
+    try {
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await staff.remove({ session: sess });
+        console.log(staff.creator)
+        staff.creator.client.pull(staff);
+        console.log('sdadadadadadsadad')
+        await staff.creator.save({ session: sess });
+        await sess.commitTransaction();
+    } catch (err) {
+        console.log(err.message);
+        return res.json(err.message);
+    }
+
+    return res.json(`Client with Email (${email}) Deleted`);
+
+}
+
+
+module.exports.deleteStaff = async (req, res) => {
+    var email = req.header('email');
+    console.log('isWorking');
+    let staff;
+    try {
+        staff = await (await Staff.findOne({ email: email })).populate('creator')
+        // console.log(staff)
+        // delete = await User.deleteOne(where)
+    } catch (err) {
+        console.log(err.message)
+    }
+
+    try {
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await staff.remove({ session: sess });
+        console.log(staff.creator)
+        staff.creator.staff.pull(staff);
+        console.log('sdadadadadadsadad')
+        await staff.creator.save({ session: sess });
+        await sess.commitTransaction();
+    } catch (err) {
+        console.log(err.message);
+        return res.json(err.message);
+    }
+
+    return res.json(`Staff with Email (${email}) Deleted`);
+
+}
+
+
 module.exports.getClient = async (req, res) => {
     console.log('llolollo')
     try {
         userWithClient = await User.findById(req.user.id).populate('client');
-        console.log({client: userWithClient.client.map(client => client.toObject({ getters: true })) })
-        console.log({client: userWithClient.client.map(client => client.toObject({ getters: true })) })
+        console.log({ client: userWithClient.client.map(client => client.toObject({ getters: true })) })
+        console.log({ client: userWithClient.client.map(client => client.toObject({ getters: true })) })
         return res.json({ client: userWithClient.client.map(client => client.toObject({ getters: true })) });
-        
+
     } catch (err) {
         return res.status(500).json(err.message);
     }
@@ -567,7 +662,7 @@ module.exports.adminAuth = async (req, res, next) => {
             if (date.getTime() < decodedToken.expTime) {
                 // const update = await pool.query("UPDATE users SET activated=$1 WHERE temporaryToken=$2", [true, admin.temporaryToken]);
                 try {
-                    // tempPlace = await Place.findById(id);
+                    // tempstaff = await staff.findById(id);
                     const updatedUser = await User.findOneAndUpdate({ temporaryToken: expTimeTokenBody }, {
                         activated: true
                     }, { new: true });
