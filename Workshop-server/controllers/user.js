@@ -382,13 +382,48 @@ module.exports.updateStaff = async (req, res) => {
         phoneNumber: await req.header('phoneNumber'),
         additionalDetails: await req.header('additionalDetails'),
     }
-    
-    let id= await req.header('id');
+
+    let id = await req.header('id');
     console.log(obj);
     var user1 = null;
     try {
         // user = await User.
         user1 = await Staff.findByIdAndUpdate(id, obj, { new: true })
+        console.log(user1)
+        return res.json('User Updated');
+    } catch (err) {
+        return res.json('Could not find user!');
+    }
+}
+
+
+module.exports.updateAdmin = async (req, res) => {
+    console.log('i am in update Admin')
+    var obj = {
+        name: await req.header('name'),
+        email: await req.header('email'),
+        gender: await req.header('gender'),
+        phoneNumber: await req.header('phoneNumber'),
+        country: await req.header('country'),
+        street: await req.header('street'),
+        society: await req.header('society'),
+        houseNumber: await req.header('houseNumber'),
+        state: await req.header('state'),
+        zip: await req.header('zip'),
+        workshopName: await req.header('workshopName'),
+        type: await req.header('type'),
+        open: await req.header('open'),
+        close: await req.header('close'),
+        city: await req.header('city'),
+        area: await req.header('area'),
+    }
+
+    let id = await req.header('id');
+    console.log(id);
+    var user1 = null;
+    try {
+        // user = await User.
+        user1 = await User.findByIdAndUpdate(id, obj, { new: true })
         console.log(user1)
         return res.json('User Updated');
     } catch (err) {
@@ -606,6 +641,20 @@ module.exports.getClient = async (req, res) => {
     //     return res.status(500).json(err.message);
     // }
 }
+
+
+module.exports.getAdmin = async (req, res) => {
+    console.log('llolollo')
+    try {
+        admin = await User.findById(req.user.id);
+        return res.json({ admin: admin });
+
+    } catch (err) {
+        return res.status(500).json(err.message);
+    }
+}
+
+
 
 module.exports.signin = async (req, res) => {
     const { error } = validateAdminSignin(req.body);

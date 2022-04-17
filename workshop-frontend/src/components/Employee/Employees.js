@@ -114,7 +114,7 @@ export default function Employees() {
                 },
                 method: 'PATCH'
             });
-
+            console.log(response1)
         } catch (err) {
             console.log(err)
         }
@@ -154,7 +154,6 @@ export default function Employees() {
     };
 
     const deleteHandler = async (email) => {
-        var parseRes;
         try {
             console.log('dsfsfsfsf')
             const response = await fetch('http://localhost:8000/api/auth/staff/delete', {
@@ -165,6 +164,7 @@ export default function Employees() {
                 method: 'DELETE'
 
             });
+            console.log(response)
         } catch (err) {
             console.log(err);
         }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -68,6 +68,79 @@ export default function Multitabs() {
         setValue(newValue - 1);
     };
 
+    const [admin, setAdmin] = useState({});
+
+    const handleSetAdmin = e => {
+        const { name, value } = e.target;
+        setAdmin(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    useEffect(() => {
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/admin/', {
+                headers: { token: localStorage.token }
+            });
+            const parseRes = await response.json();
+            setAdmin(parseRes.admin)
+            console.log(parseRes.admin)
+
+        }
+        callApi();
+    }, [])
+
+
+
+    const updateHandler = async () => {
+        // e.preventDefault()
+        // handleClose();
+        try {
+            const response1 = await fetch('http://localhost:8000/api/auth/admin/update', {
+                headers: {
+                    'token': localStorage.token,
+                    name: admin.name,
+                    email: admin.email,
+                    gender: admin.gender,
+                    phoneNumber: admin.phoneNumber,
+                    country: admin.country,
+                    street: admin.street,
+                    society: admin.society,
+                    houseNumber: admin.houseNumber,
+                    state: admin.state,
+                    zip: admin.zip,
+                    workshopName: admin.workshopName,
+                    type: admin.type,
+                    open: admin.open,
+                    close: admin.close,
+                    city: admin.city,
+                    area: admin.area,
+                    id: admin._id
+                },
+                method: 'PATCH'
+            });
+            console.log(response1)
+        } catch (err) {
+            console.log(err)
+        }
+
+
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/admin/', {
+                headers: { token: localStorage.token }
+            });
+            const parseRes = await response.json();
+            setAdmin(parseRes.admin)
+            console.log(parseRes.admin)
+
+        }
+
+        callApi();
+        console.log(admin)
+    }
+
+
     return (
         <div className={classes.root}>
             <AppBar className={classes.appBar} position="static">
@@ -94,13 +167,13 @@ export default function Multitabs() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0} >
-                <Personal />
+                <Personal admin={admin} handleChange={handleSetAdmin} submitHandler={updateHandler}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Work />
+                <Work admin={admin} handleChange={handleSetAdmin} submitHandler={updateHandler}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Contract />
+                <Contract admin={admin} handleChange={handleSetAdmin} />
             </TabPanel>
         </div>
     );
