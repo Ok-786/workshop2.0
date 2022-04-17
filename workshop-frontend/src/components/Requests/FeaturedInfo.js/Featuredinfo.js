@@ -1,12 +1,18 @@
 import { ListItemText } from '@material-ui/core';
 import { AttachMoney, Assignment, } from '@material-ui/icons';
-import React from 'react';
+import React, { useState } from 'react';
 import scriptCSS from './FeaturedInfoStyles';
 import EventIcon from '@material-ui/icons/Event';
 
 export default function Featuredinfo(props) {
     const classes = scriptCSS();
-    // var count;
+    // const [item1, setItem1] =useState(0)
+
+    // function updateSetItem(val) {
+    //     const item = item1
+    //     setItem1(item+val);
+    // }
+    var leaves=0;
 
     function renderedList(index, text) {
         if (index === 0) {
@@ -15,7 +21,15 @@ export default function Featuredinfo(props) {
                     <ListItemText primary={text} className={classes.featuredTitle} />
                     <div className={classes.featuredMoneyContainer}>
                         <span className={classes.featuredMoney}>
-                            0
+                            {/* {
+                                // props.rows.forEach((row) => {
+                                //     updateSetItem(row.timeoffLeaves)
+                                // })
+                                console.log(props.rows[0].timeoffLeaves)
+                            } */}
+
+                            
+                            {props.rows.length}
                         </span>
                         <span className={classes.featuredMoneyRate}>
                             {(props.count > 0) ? (
@@ -33,8 +47,10 @@ export default function Featuredinfo(props) {
                 <div className={classes.featuredItem}>
                     <ListItemText primary={text} className={classes.featuredTitle} />
                     <div className={classes.featuredMoneyContainer}>
-                        <span className={classes.featuredMoney}>
-                            0
+                        <span className={classes.featuredMoney}>{props.rows.forEach((row, index) => (
+                                leaves+=row.timeoffLeaves
+                            ))}
+                            {leaves}
                         </span>
                         <span className={classes.featuredMoneyRate}>
                             {(props.amount > 0) ? (
@@ -52,7 +68,7 @@ export default function Featuredinfo(props) {
                     <ListItemText primary={text} className={classes.featuredTitle} />
                     <div className={classes.featuredMoneyContainer}>
                         <span className={classes.featuredMoney}>
-                            0
+                        {props.rows.length * 500 * leaves}
                         </span>
                         <span className={classes.featuredMoneyRate}>
                             {(props.amount > 0) ? (

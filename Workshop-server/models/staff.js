@@ -60,6 +60,15 @@ const staffSchema = new mongoose.Schema({
     latitude: {
         type: SchemaTypes.Double,
         default: 33.5163 + Math.random() 
+    },
+    timeoffLeaves: {
+        type: Number
+    },
+    timeoffDescription: {
+        type: String
+    },
+    timeoffCompleted: {
+        type: Number
     }
 });
 

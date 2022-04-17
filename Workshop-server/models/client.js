@@ -60,7 +60,7 @@ const clientSchema = new mongoose.Schema({
     latitude: {
         type: SchemaTypes.Double,
         default: 33.5163 + Math.random() 
-    }
+    },
 });
 
 module.exports = mongoose.model('client', clientSchema);

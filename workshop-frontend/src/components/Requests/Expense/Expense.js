@@ -53,7 +53,7 @@ export default function Expense() {
                 </div>
             </div>
             <div className={classes.info}>
-                <Featuredinfo metaData={metaExpense} />
+                <Featuredinfo metaData={metaExpense} rows={rows}/>
             </div>
             <div>
                 <ExpenseTable rows={rows} />

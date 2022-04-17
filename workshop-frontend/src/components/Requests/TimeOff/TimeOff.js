@@ -1,27 +1,38 @@
 import SearchBar from 'material-ui-search-bar';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Featuredinfo from '../FeaturedInfo.js/Featuredinfo';
 import TimeOffTable from '../TimeOffTable/TimeOffTable';
 import SelectYear from '../YearSelectDropDown/SelectYear'
 import TimeOffStyles from './TimeOffStyles';
 
 export default function TimeOff() {
-    const metaTimeOff = ['Days', 'Leaves', 'Salary Cut'];
+    const metaTimeOff = ['Total Leaves', 'Total Absent Days', 'Salary Cut'];
     const classes = TimeOffStyles();
     const [searched, setSearched] = useState("");
-    const [rows, setRows] = useState([
-        { name: 'Danish', status: 'Pending', description: 'I am Sick, need 2 days off', offDays:3 },
-        { name: 'Abdullah', status: 'Pending', description: 'i need off to get some personal stuff done', offDays:6 }
-    ]);
-    const [data] = useState([
-        { name: 'Danish', status: 'Pending', description: 'I am Sick, need 2 days off' },
-        { name: 'Abdullah', status: 'Pending', description: 'i need off to get some personal stuff done' }
-    ]);
+
+    const [rows, setRows] = useState([]);
+    const [data, setData] = useState([]);
+
+
+    useEffect(() => {
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/staff/', {
+                headers: { token: localStorage.token }
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes.staff)
+            setRows(parseRes.staff);
+            setData(parseRes.staff);
+
+        }
+        callApi();
+    }, [])
 
 
     const requestSearch = (searchedVal) => {
         const filteredRows = data.filter((row) => {
-            return row.name.toLowerCase().includes(searchedVal.toLowerCase());
+            return row.timeoffName.toLowerCase().includes(searchedVal.toLowerCase());
         });
         setRows(filteredRows);
     };
@@ -32,21 +43,21 @@ export default function TimeOff() {
     };
     return (
         <div>
-            <div style={{ width: '100%', display:'flex' }}>
+            <div style={{ width: '100%', display: 'flex' }}>
                 <SelectYear />
 
                 <SearchBar
                     value={searched}
                     onChange={(searchVal) => requestSearch(searchVal)}
                     onCancelSearch={() => cancelSearch()}
-                    style={{width:'130px', height:'55px', border:'1px solid lightgray', marginLeft:'15px'}}
+                    style={{ width: '130px', height: '55px', border: '1px solid lightgray', marginLeft: '15px' }}
                 />
             </div>
             <div className={classes.info}>
-                <Featuredinfo metaData = {metaTimeOff}/>
+                <Featuredinfo rows={rows} metaData={metaTimeOff} />
             </div>
             <div>
-                <TimeOffTable rows={rows}/>
+                <TimeOffTable rows={rows} setData={setData} setRows={setRows} />
             </div>
             <div>
 
