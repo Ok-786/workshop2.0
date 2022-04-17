@@ -62,13 +62,20 @@ const staffSchema = new mongoose.Schema({
         default: 33.5163 + Math.random() 
     },
     timeoffLeaves: {
+        default: 2,
         type: Number
     },
     timeoffDescription: {
-        type: String
+        type: String,
+        default: "i am off for 2 daya A THEE IA  function goin on town which i have to attend and ill leave the city todaya and im busy too"
     },
     timeoffCompleted: {
-        type: Number
+        type: Number,
+        default:20
+    },
+    online: {
+        type: Boolean,
+        default: true
     }
 });
 

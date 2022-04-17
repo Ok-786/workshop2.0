@@ -1,5 +1,5 @@
 import { Avatar, Grid, List, ListItem, ListItemIcon, Typography } from '@material-ui/core';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import ProfileStyles from './ProfileStyles'
 import PlaylistAddCheckOutlinedIcon from '@material-ui/icons/PlaylistAddCheckOutlined';
 import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined';
@@ -7,7 +7,52 @@ import CircularChart from '../CircularChart/CircularChart';
 
 export default function Profile() {
     const classes = ProfileStyles();
+    const [user, setUser] = useState();
+    const [client, setClient] = useState();
+    const [staff, setStaff] = useState();
+    const [online, setOnline] = useState();
 
+    useEffect(() => {
+        var totalOnline = 0;
+        var parseResStaff;
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/admin/', {
+                headers: { token: localStorage.token }
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes.admin)
+            setUser(parseRes.admin);
+
+        }
+        async function callApi1() {
+            const response = await fetch('http://localhost:8000/api/auth/staff/', {
+                headers: { token: localStorage.token }
+            });
+
+            parseResStaff = await response.json();
+            console.log('im staff')
+            console.log(parseResStaff.staff[0].online)
+            setStaff(parseResStaff.staff);
+
+        }
+        async function callApi2() {
+            const response = await fetch('http://localhost:8000/api/auth/client/', {
+                headers: { token: localStorage.token }
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes.client)
+            setClient(parseRes.client);
+
+        }
+        callApi();
+        callApi1();
+        callApi2();
+
+        
+    }, [])
+    
     return (
         <div>
             <div className={classes.profilebar}>
@@ -86,15 +131,15 @@ export default function Profile() {
                                     </Grid>
                                     <Grid item sm={6}>
                                         <p style={{ fontSize: '12px' }}>
-                                            SALES
+                                            Registered Users
                                         </p>
                                     </Grid>
                                 </div>
                             </div>
                             <div className={classes.paperBk}>
                                 <div style={{ display: 'flex', justifyContent:'space-around' }}>
-                                    <CircularChart />
-                                    <CircularChart />
+                                    <CircularChart staff = {staff}/>
+                                    <CircularChart client = {client}/>
                                 </div>
                             </div>
                         </div>
