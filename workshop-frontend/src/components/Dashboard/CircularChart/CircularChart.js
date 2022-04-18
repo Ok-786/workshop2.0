@@ -6,13 +6,11 @@ const COLORS = ['#6792ef', '#203c82', '#519cff', '#04c5e8'];
 
 export default function CircularChart(props) {
     
-    const [online, setOnline] = useState(0);
-    const [total, setTotal] = useState(100);
-    const [client, setClient] = useState(100);
+    
 
     const data = [
-        { name: 'Online', value: props.staff?online:client },
-        { name: 'Group B', value: props.staff?total:client },
+        { name: 'Online', value: props.staff?props.online:props.clientG },
+        { name: 'Group B', value: props.staff?props.total:props.total },
     ];
 
     useEffect(() => {
@@ -25,26 +23,26 @@ export default function CircularChart(props) {
                     totalOnline = 1+totalOnline;
                 }
             })
+            props.online && props.setOnline(totalOnline);
         }
         callApi3()
         async function callApi2() {
             props.staff.forEach((staff)=> {
                     total = 1+total;
             })
+            props.total && props.setTotal(total);
         }
         async function callApi1() {
             props.client.forEach((staff)=> {
                     tClient = 1+ tClient;
             })
+            props.clientG && props.setClientG(tClient);
         }
         callApi2()
         callApi1()
 
         console.log("sdsdssfsfsfsf")
         console.log(totalOnline)
-        setOnline(totalOnline);
-        setTotal(total);
-        setClient(tClient);
     }, []);
     
     return (

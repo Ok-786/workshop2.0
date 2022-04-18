@@ -16,8 +16,8 @@ export default function Expense() {
         { name: 'Stearing', status: 500, description: 5 },
     ]);
     const [data] = useState([
-        { name: 'Danish', status: 'Pending', description: 'I am Sick, need 2 days off' },
-        { name: 'Abdullah', status: 'Pending', description: 'i need off to get some personal stuff done' }
+        { name: 'Tyres', status: 200, description: 2 },
+        { name: 'Stearing', status: 500, description: 5 },
     ]);
 
 

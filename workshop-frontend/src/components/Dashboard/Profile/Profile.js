@@ -10,10 +10,11 @@ export default function Profile() {
     const [user, setUser] = useState();
     const [client, setClient] = useState();
     const [staff, setStaff] = useState();
-    const [online, setOnline] = useState();
+    const [online, setOnline] = useState(1);
+    const [total, setTotal] = useState(2);
+    const [clientG, setClientG] = useState(2);
 
     useEffect(() => {
-        var totalOnline = 0;
         var parseResStaff;
         async function callApi() {
             const response = await fetch('http://localhost:8000/api/auth/admin/', {
@@ -50,9 +51,9 @@ export default function Profile() {
         callApi1();
         callApi2();
 
-        
+
     }, [])
-    
+
     return (
         <div>
             <div className={classes.profilebar}>
@@ -93,7 +94,7 @@ export default function Profile() {
                         <div style={{ marginBlockStart: '80px' }}></div>
                     </Grid>
                     <Grid item sm={6} xm={6} xl={6} lg={6} md={6}>
-                        <div style={{fontSize:'9px'}} >.</div>
+                        <div style={{ fontSize: '9px' }} >.</div>
                         <div className={classes.paperBk}>
                             <Typography
                                 noWrap
@@ -102,7 +103,7 @@ export default function Profile() {
                                 YOU HAVE
                             </Typography>
                             <List >
-                                
+
                                 <ListItem button onClick={() => {
                                 }} className={classes.listItem} >
                                     <ListItemIcon><span style={{ fontSize: '3px' }}>.</span><PlaylistAddCheckOutlinedIcon style={{ width: '20px', color: '#6792ef' }} /></ListItemIcon>
@@ -123,7 +124,7 @@ export default function Profile() {
 
                         <div className={classes.vl}>
                             <div className={classes.paperBk}>
-                                <div style={{ display: 'flex', justifyContent:'center', textAlign:'center' }}>
+                                <div style={{ display: 'flex', justifyContent: 'center', textAlign: 'center' }}>
                                     <Grid item sm={6}>
                                         <p style={{ fontSize: '12px' }}>
                                             STAFF ONLINE
@@ -137,9 +138,9 @@ export default function Profile() {
                                 </div>
                             </div>
                             <div className={classes.paperBk}>
-                                <div style={{ display: 'flex', justifyContent:'space-around' }}>
-                                    <CircularChart staff = {staff}/>
-                                    <CircularChart client = {client}/>
+                                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                                    <CircularChart staff={staff} online={online} setOnline={setOnline} total={total} setTotal={setTotal} />
+                                    <CircularChart client={client} clientG={clientG} setClientG={setClientG} setTotal={setTotal} total={total} />
                                 </div>
                             </div>
                         </div>
