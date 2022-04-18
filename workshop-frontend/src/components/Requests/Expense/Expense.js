@@ -1,5 +1,5 @@
 import SearchBar from 'material-ui-search-bar';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Featuredinfo from '../FeaturedInfo.js/Featuredinfo';
 import ExpenseTable from '../ExpenseTable/ExpenseTable';
 import SelectYear from '../YearSelectDropDown/SelectYear'
@@ -8,18 +8,48 @@ import { Button } from '@material-ui/core';
 import AddExpense from '../AddExpense/AddExpense';
 
 export default function Expense() {
-    const metaExpense = ['Expense', 'Pending', 'Approved'];
+    const [expense, setExpense] = useState({
+        name: '',
+        cost: '',
+        description: '',
+        expenseType: '',
+        quantity: '',
+    })
+
+    const handleChange = e => {
+        const { name, value } = e.target;
+        setExpense(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
+
+    const metaExpense = ['No. of items', 'Total items', 'Total Expense'];
     const classes = ExpenseStyles();
     const [searched, setSearched] = useState("");
     const [rows, setRows] = useState([
         { name: 'Tyres', status: 200, description: 2 },
         { name: 'Stearing', status: 500, description: 5 },
     ]);
-    const [data] = useState([
+    const [data, setData] = useState([
         { name: 'Tyres', status: 200, description: 2 },
         { name: 'Stearing', status: 500, description: 5 },
     ]);
 
+    useEffect(() => {
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/expense/', {
+                headers: { token: localStorage.token }
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes.expense)
+            setRows(parseRes.expense);
+            setData(parseRes.expense);
+
+        }
+        callApi();
+    }, [])
 
     const requestSearch = (searchedVal) => {
         const filteredRows = data.filter((row) => {
@@ -45,6 +75,10 @@ export default function Expense() {
                 />
                 <div className={classes.rightDiv}>
                     <AddExpense
+                        setData={setData}
+                        setRows={setRows}
+                        expense={expense}
+                        handleChange={handleChange}
                         component={<Button variant="contained" color="primary">
                             Add Expense
                         </Button>}
@@ -53,10 +87,17 @@ export default function Expense() {
                 </div>
             </div>
             <div className={classes.info}>
-                <Featuredinfo metaData={metaExpense} rows={rows}/>
+                <Featuredinfo metaData={metaExpense} rows={rows} />
             </div>
             <div>
-                <ExpenseTable rows={rows} />
+                <ExpenseTable
+                    rows={rows}
+                    setData={setData}
+                    setRows={setRows}
+                    expense={expense}
+                    setExpense={setExpense}
+                    handleChange={handleChange}
+                />
             </div>
             <div>
 

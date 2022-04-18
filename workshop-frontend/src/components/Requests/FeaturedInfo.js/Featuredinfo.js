@@ -1,6 +1,6 @@
 import { ListItemText } from '@material-ui/core';
 import { AttachMoney, Assignment, } from '@material-ui/icons';
-import React, { useState } from 'react';
+import React from 'react';
 import scriptCSS from './FeaturedInfoStyles';
 import EventIcon from '@material-ui/icons/Event';
 
@@ -12,7 +12,8 @@ export default function Featuredinfo(props) {
     //     const item = item1
     //     setItem1(item+val);
     // }
-    var leaves=0;
+    var leaves = 0;
+    var cost = 0;
 
     function renderedList(index, text) {
         if (index === 0) {
@@ -28,7 +29,7 @@ export default function Featuredinfo(props) {
                                 console.log(props.rows[0].timeoffLeaves)
                             } */}
 
-                            
+
                             {props.rows.length}
                         </span>
                         <span className={classes.featuredMoneyRate}>
@@ -48,8 +49,8 @@ export default function Featuredinfo(props) {
                     <ListItemText primary={text} className={classes.featuredTitle} />
                     <div className={classes.featuredMoneyContainer}>
                         <span className={classes.featuredMoney}>{props.rows.forEach((row, index) => (
-                                leaves+=row.timeoffLeaves
-                            ))}
+                            leaves += row.timeoffLeaves ? row.timeoffLeaves : row.quantity
+                        ))}
                             {leaves}
                         </span>
                         <span className={classes.featuredMoneyRate}>
@@ -68,7 +69,10 @@ export default function Featuredinfo(props) {
                     <ListItemText primary={text} className={classes.featuredTitle} />
                     <div className={classes.featuredMoneyContainer}>
                         <span className={classes.featuredMoney}>
-                        {props.rows.length * 500 * leaves}
+                            {props.rows.forEach((row, index) => (
+                                cost += row.cost && row.cost * row.quantity
+                            ))}
+                            {cost > 0 ? cost : props.rows.length * 500 * leaves}
                         </span>
                         <span className={classes.featuredMoneyRate}>
                             {(props.amount > 0) ? (

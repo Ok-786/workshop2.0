@@ -11,6 +11,7 @@ const nodemailer = require(`nodemailer`);
 const Product = require("../models/products");
 const Staff = require("../models/staff");
 const Client = require("../models/client");
+const Expense = require("../models/expense")
 require(`dotenv`).config();
 
 var transporter = nodemailer.createTransport({
@@ -240,6 +241,64 @@ module.exports.addProduct = async (req, res) => {
     // // }
     // return res.json({ p: "Product Added" });
 };
+
+module.exports.addExpense = async (req, res) => {
+
+    const a = JSON.parse(req.header('expense'))
+
+    let expense = new Expense({
+        name: a.name,
+        cost: a.cost,
+        quantity: a.quantity,
+        description: a.description,
+        expenseType: a.expenseType
+    })
+
+    try {
+        await expense.save();
+    } catch (error) {
+        return res.status(500).json("Server Error!");
+    }
+    console.log(a)
+    return res.json("Expense Added");
+
+};
+
+
+module.exports.deleteExpense = async (req, res) => {
+    var id = req.header('name');
+    console.log('isWorking');
+    let expense;
+    try {
+        expense = await Expense.findByIdAndDelete({ _id: id })
+
+        return res.json({ message: `${expense.name} is Removed` });
+
+    } catch (err) {
+        console.log(err.message)
+
+        return res.status(500).json("Server Error!");
+    }
+}
+
+
+module.exports.getExpense = async (req, res) => {
+    var expense;
+    try {
+        expense = await Expense.find({});
+        // console.log({expense: Expense.map(product => product.toObject({ getters: true }))})
+        return res.json({ expense: expense })
+
+    } catch (err) {
+        return res.status(500).json(err.message);
+    }
+};
+
+
+
+
+
+
 module.exports.addStaff = async (req, res) => {
     console.log("mmmmmmmmmmm" + req.user.id)
     // const { error } = validateProduct(req.body);
@@ -393,6 +452,28 @@ module.exports.updateStaff = async (req, res) => {
         return res.json('User Updated');
     } catch (err) {
         return res.json('Could not find user!');
+    }
+}
+
+module.exports.updateExpense = async (req, res) => {
+    var obj = {
+        name: await req.header('name'),
+        cost: await req.header('cost'),
+        description: await req.header('description'),
+        expenseType: await req.header('expenseType'),
+        quantity: await req.header('quantity'),
+    }
+
+    let id = await req.header('id');
+    console.log(id);
+    var user1 = null;
+    try {
+        // user = await User.
+        user1 = await Expense.findByIdAndUpdate(id, obj, { new: true })
+        console.log(user1)
+        return res.json({ message: `${obj.name} Updated` });
+    } catch (err) {
+        return res.json('Could not find expense!');
     }
 }
 
