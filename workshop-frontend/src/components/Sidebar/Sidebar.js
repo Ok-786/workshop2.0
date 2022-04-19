@@ -37,7 +37,7 @@ export default function Sidebar(props) {
         setOpen(false);
     };
 
-   
+
 
     return (
         <Fragment>
@@ -277,14 +277,17 @@ export default function Sidebar(props) {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar2} />
-                    {props.selectedComponent === 'Dashboard' && props.dashboard} 
-                    {props.selectedComponent === 'Requests' && props.requests} 
-                    {props.selectedComponent === 'Calendar' && props.calander} 
-                    {props.selectedComponent === 'MyAccount' && props.myaccount} 
-                    {props.selectedComponent === 'Live' && props.map} 
-                    {props.selectedComponent === 'Shop' && props.shop} 
-                    {props.selectedComponent === 'Clients' && props.client} 
-                    {props.selectedComponent === 'Employees' && props.employee} 
+
+                    {props.selectedComponent !== 'Dashboard' && <p>home {'>'} {props.selectedComponent}</p>}
+                    {props.selectedComponent === 'Dashboard' && <p>home </p>}
+                    {props.selectedComponent === 'Dashboard' && props.dashboard}
+                    {props.selectedComponent === 'Requests' && props.requests}
+                    {props.selectedComponent === 'Calendar' && props.calander}
+                    {props.selectedComponent === 'MyAccount' && props.myaccount}
+                    {props.selectedComponent === 'Live' && props.map}
+                    {props.selectedComponent === 'Shop' && props.shop}
+                    {props.selectedComponent === 'Clients' && props.client}
+                    {props.selectedComponent === 'Employees' && props.employee}
                 </main>
             </div>
         </Fragment>

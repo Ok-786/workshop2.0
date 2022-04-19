@@ -94,10 +94,10 @@ export default function AddExpense(props) {
                         <Divider style={{ marginBottom: '20px' }} />
                         <Grid container spacing={3} >
                             {/* <Grid item sm={12}> */}
-                            <Grid item sm={4}>
+                            <Grid item sm={5}>
                                 <div style={{ marginTop: '-12px', color: 'rgb(0,0,0,.7)' }}><h4>Expense Name : </h4></div>
                             </Grid>
-                            <Grid item sm={8}>
+                            <Grid item sm={7}>
                                 <TextField
                                     size='small'
                                     style={{ width: '100%' }}
@@ -110,10 +110,10 @@ export default function AddExpense(props) {
                                 </TextField>
                             </Grid>
                             {/* </Grid> */}
-                            <Grid item sm={4}>
+                            <Grid item sm={5}>
                                 <div style={{ marginTop: '-8px', color: 'rgb(0,0,0,.7)' }}><h4 style={{ paddingBottom: '10px' }}>Expense Type: </h4></div>
                             </Grid>
-                            <Grid item sm={8}>
+                            <Grid item sm={7}>
                                 <TextField
                                     value={props.expense.expenseType}
                                     name="expenseType"
@@ -125,10 +125,10 @@ export default function AddExpense(props) {
 
                                 </TextField>
                             </Grid>
-                            <Grid item sm={4}>
+                            <Grid item sm={5}>
                                 <div style={{ marginTop: '-12px', color: 'rgb(0,0,0,.7)' }}><h4>Quantity of Item: </h4></div>
                             </Grid>
-                            <Grid item sm={8}>
+                            <Grid item sm={7}>
                                 <TextField
                                     value={props.expense.quantity}
                                     name="quantity"
@@ -140,10 +140,10 @@ export default function AddExpense(props) {
 
                                 </TextField>
                             </Grid>
-                            <Grid item sm={4}>
+                            <Grid item sm={5}>
                                 <div style={{ marginTop: '-8px', color: 'rgb(0,0,0,.7)' }}><h4 style={{ paddingBottom: '10px' }}>Cost of Item : </h4></div>
                             </Grid>
-                            <Grid item sm={8}>
+                            <Grid item sm={7}>
                                 <TextField
                                     value={props.expense.cost}
                                     name="cost"
@@ -168,7 +168,7 @@ export default function AddExpense(props) {
                                 />
                                 {/* </div> */}
                             </Grid>
-                            <div style={{ display:'relative', marginLeft: '50%', marginTop: '20px', width: '100%' }}>
+                            <div style={{ display:'relative', marginLeft: '40%', marginTop: '20px', width: '100%' }}>
                             <Button variant='contained' style={{ backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={callApi}>Add Expense</Button>
                             <Button variant='contained' style={{ marginLeft: '10px', backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={handleClose}>Cancel</Button>
                         </div>
