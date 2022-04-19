@@ -294,11 +294,12 @@ export default function ExpenseTable(props) {
                                 />
                                 {/* </div> */}
                             </Grid>
+                            <div style={{ display: 'relative', marginLeft: '50%', marginTop: '20px', width: '100%' }}>
+                                <Button variant='contained' style={{ backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={callApi}>Confirm</Button>
+                                <Button variant='contained' style={{ marginLeft: '10px', backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={handleClose}>Cancel</Button>
+                            </div>
                         </Grid>
-                        <div style={{ marginLeft: '320px', marginTop: '20px', width: '100%' }}>
-                            <Button variant='contained' style={{ backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={callApi}>Confirm</Button>
-                            <Button variant='contained' style={{ marginLeft: '10px', backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={handleClose}>Cancel</Button>
-                        </div>
+
                     </div>
                 </Fade>
             </Modal>

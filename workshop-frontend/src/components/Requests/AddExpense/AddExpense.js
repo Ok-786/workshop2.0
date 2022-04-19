@@ -168,7 +168,7 @@ export default function AddExpense(props) {
                                 />
                                 {/* </div> */}
                             </Grid>
-                            <div style={{ display:'relative', marginLeft: '57%', marginTop: '20px', width: '100%' }}>
+                            <div style={{ display:'relative', marginLeft: '50%', marginTop: '20px', width: '100%' }}>
                             <Button variant='contained' style={{ backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={callApi}>Add Expense</Button>
                             <Button variant='contained' style={{ marginLeft: '10px', backgroundColor: 'rgb(32 60 130)', color: 'white' }} onClick={handleClose}>Cancel</Button>
                         </div>
