@@ -20,7 +20,7 @@ export default function TimeOffTable(props) {
 
     return (
         <div className={classes.widgetlg}>
-            <TableContainer component={Paper} style={{ border: '0px solid', marginTop: '100px', borderBottom: "none" }} >
+            <TableContainer  style={{ border: '0px solid', marginTop: '100px', borderBottom: "none" }} >
                 <Table className={classes.table} aria-label="simple table" style={{ width: '100%', border: 'none', borderBottom: "none" }} >
                     <TableHead style={{ background: '#fafafa', border: '0px ', borderBottom: "none" }}>
                         <TableRow style={{ borderBottom: "none" }}>

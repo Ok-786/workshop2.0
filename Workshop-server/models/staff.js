@@ -76,6 +76,9 @@ const staffSchema = new mongoose.Schema({
     online: {
         type: Boolean,
         default: true
+    },
+    designation: {
+        type: String
     }
 });
 

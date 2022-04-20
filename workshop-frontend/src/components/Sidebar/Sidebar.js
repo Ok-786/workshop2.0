@@ -277,9 +277,10 @@ export default function Sidebar(props) {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar2} />
-
-                    {props.selectedComponent !== 'Dashboard' && <p>home {'>'} {props.selectedComponent}</p>}
-                    {props.selectedComponent === 'Dashboard' && <p>home </p>}
+                    <div style={{ display: 'inline-flex', cursor:'pointer'}}>
+                        {props.selectedComponent !== 'Dashboard' && <p style={{color:'darkblue' }} onClick={() => props.setSelectedComponent('Dashboard')}>Home &nbsp; {' > '}&nbsp;</p>}
+                        {props.selectedComponent !== 'Dashboard' && <p onClick={() => props.setSelectedComponent(props.selectedComponent)}> {props.selectedComponent}</p>}
+                    </div>
                     {props.selectedComponent === 'Dashboard' && props.dashboard}
                     {props.selectedComponent === 'Requests' && props.requests}
                     {props.selectedComponent === 'Calendar' && props.calander}

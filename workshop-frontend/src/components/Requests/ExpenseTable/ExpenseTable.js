@@ -159,33 +159,33 @@ export default function ExpenseTable(props) {
             <span onClick={handleOpen}>
                 {props.component}
             </span>
-            <TableContainer component={Paper} style={{ border: '0px solid', marginTop: '100px', borderBottom: "none" }} >
+            <TableContainer  style={{ border: '0px solid', marginTop: '100px', borderBottom: "none" }} >
                 <Table className={classes1.table} aria-label="simple table" style={{ width: '100%', border: 'none', borderBottom: "none" }} >
                     <TableHead style={{ background: '#fafafa', border: '0px ', borderBottom: "none" }}>
                         <TableRow style={{ borderBottom: "none" }}>
 
-                            <TableCell width="1%" align="right"></TableCell>
-                            <TableCell width="10%" align="Left" ><b>Name</b></TableCell>
-                            <TableCell width="10%" align="left"><b>Detail</b></TableCell>
-                            <TableCell width="10%" align="left"><b>Quantity</b></TableCell>
-                            <TableCell width="10%" align="left"><b>Cost Per Piece</b></TableCell>
-                            <TableCell width="10%" align="left"><b>Cost</b></TableCell>
+                            {/* <TableCell width="1%" align="right"></TableCell> */}
+                            <TableCell width="5%" align="Left" ><b>Name</b></TableCell>
+                            <TableCell width="15%" align="left"><b>Detail</b></TableCell>
+                            <TableCell width="5%" align="left"><b>Quantity</b></TableCell>
+                            <TableCell width="5%" align="left"><b>Cost Per Piece</b></TableCell>
+                            <TableCell width="5%" align="left"><b>Cost</b></TableCell>
                             <TableCell width="1%" align="center"><b>Manage</b></TableCell>
-                            <TableCell width="1%" align="right"></TableCell>
+                            {/* <TableCell width="1%" align="right"></TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody style={{ borderBottom: "none" }}>
                         {props.rows.map((row, index) => (
                             <TableRow key={row.id} id={row.id} style={{ borderBottom: "none" }}>
-                                <TableCell style={{ borderBottom: "none" }} component="th" width="1%" align="left" scope="row">
+                                {/* <TableCell style={{ borderBottom: "none" }} component="th" width="1%" align="left" scope="row"> */}
                                     {/* <img id={`img${row.firstName}`} src={`http://localhost:8000/${row.image}`} alt={`pic of ${row.firstName}`} style={{ width: 60 }} /> */}
-                                    <img id={`img${row.name}`} src={Image} alt={`pic of ${row.name}`} style={{ width: 60, borderRadius: "50%" }} />
-                                </TableCell>
+                                    {/* <img id={`img${row.name}`} src={Image} alt={`pic of ${row.name}`} style={{ width: 60, borderRadius: "50%" }} /> */}
+                                {/* </TableCell> */}
                                 {/* <TableCell width="10%" style={{ color: 'blue' }} component="th" scope="row" id={`id${row.id}`}>{index}</TableCell> */}
-                                <TableCell width="10%" style={{ color: 'blue', borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.name}</TableCell>
-                                <TableCell width="1%" style={{ borderBottom: "none", }} align="left" id={`fn${row.id}`}>{row.description}$</TableCell>
-                                <TableCell width="10%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.quantity}</TableCell>
-                                <TableCell width="10%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.cost}</TableCell>
+                                <TableCell width="5%" style={{ color: 'blue', borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.name}</TableCell>
+                                <TableCell width="15%" style={{ borderBottom: "none", }} align="left" id={`fn${row.id}`}>{row.description}$</TableCell>
+                                <TableCell width="5%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.quantity}</TableCell>
+                                <TableCell width="5%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.cost}</TableCell>
                                 <TableCell width="1%" style={{ borderBottom: "none", }} align="left" id={`fn${row.id}`}>{row.cost * row.quantity}$</TableCell>
                                 {/* <TableCell width="1%" align="right" ><img id={`img${row.id}`} src={row.imageURL} alt={`profile pic of ${row.firstName}`} style={{ width: 60 }} /></TableCell> */}
                                 <TableCell align="left" style={{ borderBottom: "none" }}>

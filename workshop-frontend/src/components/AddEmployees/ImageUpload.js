@@ -58,33 +58,33 @@ const ImageUpload = (props) => {
                 {previewUrl && <div className="image-upload__preview">
                     {previewUrl && <img src={previewUrl} alt="Add_Image" />}
                 </div>}
-                
+
                 {!previewUrl && <Button color='primary' onClick={pickImageHandler}><b>PICK IMAGE</b></Button>}
 
-                {previewUrl && <Button color='primary' onClick={pickImageHandler}><b>CHANGE IMAGE</b></Button>}
+                    {previewUrl && <Button color='primary' onClick={pickImageHandler}><b>CHANGE IMAGE</b></Button>}
 
 
-                {!isValid && <p style={{ textAlign: 'center' }}>{props.errorText}</p>}
-            </div>}
+                    {!isValid && <p style={{ textAlign: 'center' }}>{props.errorText}</p>}
+                </div>}
 
-            {
-                props.rounded &&
-                <div>
-                    <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img className="rounded-circle mt-5" width="180px" src={previewUrl} alt="Add_Image" />
-                        <br/>
-                        <span className="font-weight-bold">
-                            {!previewUrl && <Button color='secondary' onClick={pickImageHandler}><b>PICK IMAGE</b></Button>}
-                            {previewUrl && <Button color='primary' onClick={pickImageHandler}><b>CHANGE IMAGE</b></Button>}
-                        </span>
+                {
+                    props.rounded &&
+                    <div>
+                        <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+                            {/* <img className="rounded-circle mt-5" width="180px" src={previewUrl} alt="Add_Image" /> */}
+                            <br />
+                            <span className="font-weight-bold">
+                                {!previewUrl && <span> Upload Image: <Button variant='outlined' color='primary' onClick={pickImageHandler}><b>PICK IMAGE</b></Button></span>}
+                                {previewUrl && <span>Change Image: <Button color='secondary' variant='outlined' onClick={pickImageHandler} ><b>CHANGE IMAGE</b></Button></span>}
+                            </span>
+                        </div>
+
+
                     </div>
+                }
 
-
-                </div>
-            }
-
-        </div>
+            </div>
     );
 }
 
-export default ImageUpload;
+            export default ImageUpload;

@@ -14,6 +14,8 @@ const MultitabsStyles = makeStyles(theme => ({
         color:'black',
         paddingTop:'15px',
         paddingRight:'15px',
+        boxShadow:'none',
+        border:'1px rgb(0,0,0,.1) solid',
     },
     tabs: {
         
@@ -23,13 +25,18 @@ const MultitabsStyles = makeStyles(theme => ({
         fontSize:'12px',
         fontWeight:'bold',
         color:'blue'
+        
     },
     insideTabRight: {
         borderRight: '1px solid lightblue',
         borderLeft: '1px solid lightblue',
         borderTop: '1px solid lightblue',
         fontSize:'12px',
-        borderRadius:'.5vh'
+        borderRadius:'.5vh',
+        
+        borderBlockEnd:'2px white solid'
+    },
+    addedTabs: {
     }
 }));
 
