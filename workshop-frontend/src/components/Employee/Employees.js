@@ -258,7 +258,7 @@ export default function Employees() {
                         <MenuItem value={'All'}>All</MenuItem>
                     </Select>
                 </FormControl>
-                <Button style={{ marginLeft: '68%' }} variant="outlined" size="medium" onClick={() => { setType('Add'); handleOpen(current) }}>Add Employee</Button>
+                <Button style={{ marginLeft: '66%' }} variant="outlined" size="medium" onClick={() => { setType('Add'); handleOpen(current) }}>Add Employee</Button>
             </div>
             <TableContainer style={{ border: '0px solid', marginTop: '30px', borderBottom: "none" }}>
                 <Table className={classes.table} aria-label="simple table" style={{ width: '100%', border: 'none', borderBottom: "none" }} >
