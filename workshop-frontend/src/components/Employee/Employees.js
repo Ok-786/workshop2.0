@@ -268,8 +268,9 @@ export default function Employees() {
                             <TableCell align="left" ><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name</b></TableCell>
                             <TableCell align="left" ><b>Contact</b></TableCell>
                             <TableCell align="left" ><b>Designation</b></TableCell>
+                            <TableCell align="left" ><b>Checked In</b></TableCell>
                             {/* <TableCell align="left" ><b>Area</b></TableCell> */}
-                            <TableCell align="left" width={'35%'} style={{ textAlign: 'end', paddingRight: '5%' }}><b>Actions</b></TableCell>
+                            <TableCell align="left" width={'25%'} style={{ textAlign: 'end', paddingRight: '5%' }}><b>Actions</b></TableCell>
                             {/* <TableCell align="left"></TableCell> */}
                         </TableRow>
                     </TableHead>
@@ -287,6 +288,7 @@ export default function Employees() {
                                             </div>
                                         </TableCell>
                                         <TableCell align="left" style={{ borderBottom: "none" }}>{row.designation}</TableCell>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>{row.checkedIn}</TableCell>
                                         {/* <TableCell align="left" style={{ color: '#80a4f1', borderBottom: "none" }}>{row.operationalArea}</TableCell> */}
                                         {/* <TableCell width={1} align="left" style={{ justifyContent:'end', alignItems:'end',textAlign:'end',  cursor: 'pointer',paddingRight:'5%', borderBottom: "none" }} onClick={() => handleOpen(row)}><div style={{display:'inline-flex'}}></div></TableCell> */}
                                         <TableCell width={1} align="left" style={{ justifyContent: 'end', alignItems: 'end', textAlign: 'end', cursor: 'pointer', paddingRight: '5%', borderBottom: "none" }}>

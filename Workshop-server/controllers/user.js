@@ -477,6 +477,23 @@ module.exports.updateExpense = async (req, res) => {
     }
 }
 
+module.exports.updateClient = async (req, res) => {
+    // const disabled1 = await req.header('disabled');
+    const disabled1 = await req.header('disabled');
+    let id = await req.header('id');
+    console.log(disabled1)
+    var user1 = null;
+    try {
+        // user = await User.
+        user1 = await Client.findByIdAndUpdate(id, { disabled: disabled1, skills: 'asd' }, { new: true })
+        console.log(user1)
+        return res.json('done');
+    } catch (err) {
+        return res.json('Could not find user!');
+    }
+}
+
+
 
 module.exports.updateAdmin = async (req, res) => {
     console.log('i am in update Admin')

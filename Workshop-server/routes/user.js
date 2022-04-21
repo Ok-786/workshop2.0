@@ -1,4 +1,4 @@
-const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense } = require('../controllers/user');
+const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient } = require('../controllers/user');
 const authorization = require('../middleware/jwt-auth');
 const { requireAdmin, requireClient } = require('../middleware/userAuth');
 const fileUpload = require('../middleware/file-upload');
@@ -23,6 +23,7 @@ router.delete('/client/delete', authorization, requireAdmin, deleteClient);
 router.get('/client/', authorization, requireAdmin, getClient);
 router.post('/staff/create', authorization, requireAdmin, fileUpload.single('file'), addStaff);
 router.post('/client/create', authorization, requireAdmin, fileUpload.single('file'), addClient);
+router.patch('/client/update', authorization, requireAdmin, updateClient);
 router.get('/admin/dashboard', authorization, adminDashboard);
 router.get('/verify', authorization, verifyToken);
 

@@ -9,6 +9,7 @@ import MultitabsStyles from './MultitabsStyles';
 import clsx from 'clsx';
 import Clients from '../Client/Clients';
 import AddClients from '../AddClients/AddClients';
+import ClientMap from '../Client/ClientMap';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -80,7 +81,7 @@ export default function Multitabs() {
 
 
                 >
-                    <LinkTab className={classes.insideTabLeft} label={(value === 0 && 'Manage') || (value === 1 && 'Add') || (value === 2 && '')} disabled />
+                    <LinkTab className={classes.insideTabLeft} label={(value === 0 && 'Manage') || (value === 1 && 'Live Location') || (value === 2 && '')} disabled />
                     <LinkTab
                         label="Manage" href="/drafts" {...a11yProps(0)}
                         className={clsx({
@@ -88,14 +89,14 @@ export default function Multitabs() {
                             [classes.rightAlign]: true,
                         })}
                     />
-                    <LinkTab className={classes.insideTabRight} label="Add" href="/trash" {...a11yProps(1)} />
+                    <LinkTab className={classes.insideTabRight} label="Live Location" href="/trash" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0} >
                 <Clients />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <AddClients />
+                <ClientMap />
             </TabPanel>
         </div>
     );

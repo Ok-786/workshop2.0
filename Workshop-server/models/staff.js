@@ -79,6 +79,10 @@ const staffSchema = new mongoose.Schema({
     },
     designation: {
         type: String
+    },
+    checkedIn: {
+        type: String,
+        default: 'Not Checked in'
     }
 });
 

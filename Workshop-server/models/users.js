@@ -81,6 +81,10 @@ const userSchema = mongoose.Schema({
     },
     area: {
         type: String
+    },
+    disabled: {
+        type: Boolean,
+        default: false
     }
 });
 userSchema.plugin(uniqueValidator);

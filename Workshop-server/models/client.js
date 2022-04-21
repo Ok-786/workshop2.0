@@ -61,6 +61,10 @@ const clientSchema = new mongoose.Schema({
         type: SchemaTypes.Double,
         default: 33.5163 + Math.random() 
     },
+    disabled: {
+        type: Boolean,
+        default: false
+    }
 });
 
 module.exports = mongoose.model('client', clientSchema);
