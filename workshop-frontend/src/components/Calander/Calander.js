@@ -61,7 +61,7 @@ export default function Calander1() {
 
     const event = ({ event }) => {
         return (
-            <div style={{background:'lightblue', border:'none'}}>
+            <div style={{background:'#6792ef', border:'none'}}>
                 {event.name} <br /> <small>{event.description}</small>{" "}
             </div>
         );
