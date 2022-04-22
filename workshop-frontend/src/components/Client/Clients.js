@@ -6,7 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+// import Paper from "@material-ui/core/Paper";
 import SearchBar from "material-ui-search-bar";
 // import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -114,9 +114,6 @@ export default function Clients() {
     };
 
 
-    const profileHandler = () => {
-
-    }
 
     
     const [open, setOpen] = React.useState(false);

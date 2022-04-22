@@ -12,6 +12,7 @@ const Product = require("../models/products");
 const Staff = require("../models/staff");
 const Client = require("../models/client");
 const Expense = require("../models/expense")
+const Event = require("../models/event")
 require(`dotenv`).config();
 
 var transporter = nodemailer.createTransport({
@@ -242,6 +243,29 @@ module.exports.addProduct = async (req, res) => {
     // return res.json({ p: "Product Added" });
 };
 
+module.exports.addEvent = async (req, res) => {
+
+    const a = JSON.parse(req.header('Event'))
+
+    let expense = new Event({
+        name: a.name,
+        description: a.description,
+        allDay: a.allDay,
+        start: a.startDate,
+        end: a.endDate
+    })
+
+    try {
+        await expense.save();
+    } catch (error) {
+        return res.status(500).json("Server Error!");
+    }
+    console.log(a)
+    return res.json({message:"New Event Added Sucessfully"});
+
+};
+
+
 module.exports.addExpense = async (req, res) => {
 
     const a = JSON.parse(req.header('expense'))
@@ -292,6 +316,21 @@ module.exports.getExpense = async (req, res) => {
     } catch (err) {
         return res.status(500).json(err.message);
     }
+};
+
+
+module.exports.getEvent = async (req, res) => {
+    var event;
+    try {
+        event = await Event.find({});
+        // console.log({expense: Expense.map(product => product.toObject({ getters: true }))})
+        console.log(event)
+        return res.json({ event: event })
+
+    } catch (err) {
+        return res.status(500).json(err.message);
+    }
+    // return res.status(500).json('err.message');
 };
 
 

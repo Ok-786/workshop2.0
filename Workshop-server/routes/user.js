@@ -1,4 +1,4 @@
-const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient } = require('../controllers/user');
+const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient, addEvent, getEvent } = require('../controllers/user');
 const authorization = require('../middleware/jwt-auth');
 const { requireAdmin, requireClient } = require('../middleware/userAuth');
 const fileUpload = require('../middleware/file-upload');
@@ -14,6 +14,8 @@ router.get('/products/', authorization, requireAdmin, getProducts);
 router.get('/staff/', authorization, requireAdmin, getStaff);
 router.get('/expense/', authorization, requireAdmin, getExpense);
 router.post('/expense/create', authorization, requireAdmin, addExpense);
+router.post('/event/create', authorization, requireAdmin, addEvent);
+router.get('/event/', authorization, requireAdmin, getEvent);
 router.patch('/staff/update', authorization, requireAdmin, updateStaff);
 router.patch('/expense/update', authorization, requireAdmin, updateExpense);
 router.patch('/admin/update', authorization, requireAdmin, updateAdmin);

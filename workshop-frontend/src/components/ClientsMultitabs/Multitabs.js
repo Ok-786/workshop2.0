@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import MultitabsStyles from './MultitabsStyles';
 import clsx from 'clsx';
 import Clients from '../Client/Clients';
-import AddClients from '../AddClients/AddClients';
+// import AddClients from '../AddClients/AddClients';
 import ClientMap from '../Client/ClientMap';
 
 function TabPanel(props) {

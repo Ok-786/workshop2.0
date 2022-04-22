@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { Avatar, Box, Modal, Tooltip } from '@material-ui/core';
 // import image from '../../Images/i1.jpg';
 import '../../index.css';
-import Filter from '../Dashboard/Filter/Filter';
+// import Filter from '../Dashboard/Filter/Filter';
 import { withStyles } from '@material-ui/styles';
 
 export default function ClientMap() {
@@ -43,6 +43,7 @@ export default function ClientMap() {
     const [staffs, setStaffs] = React.useState([]);
 
     React.useEffect(() => {
+        setSelectedFilter('All');
         // async function callApi1() {
         //     const response = await fetch('http://localhost:8000/api/auth/staff/', {
         //         headers: { token: localStorage.token }
