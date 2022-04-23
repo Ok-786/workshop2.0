@@ -319,6 +319,7 @@ module.exports.getExpense = async (req, res) => {
 };
 
 
+
 module.exports.getEvent = async (req, res) => {
     var event;
     try {
@@ -696,6 +697,8 @@ module.exports.getStaff = async (req, res) => {
     //     return res.status(500).json(err.message);
     // }
 }
+
+
 
 
 module.exports.deleteClient = async (req, res) => {

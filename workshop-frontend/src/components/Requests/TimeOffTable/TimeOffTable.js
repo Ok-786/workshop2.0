@@ -6,7 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 // import { Button } from '@material-ui/core';
 import TimeOffTableStyles from './TimeOffTableStyles';
 import ProgressBar from '../Progressbar/ProgressBar';
@@ -38,7 +38,7 @@ export default function TimeOffTable(props) {
                             <TableRow key={row.id} id={row.id} style={{ borderBottom: "none" }}>
                                 <TableCell style={{ borderBottom: "none" }} component="th" width="1%" align="left" scope="row">
                                     {/* <img id={`img${row.firstName}`} src={`http://localhost:8000/${row.image}`} alt={`pic of ${row.firstName}`} style={{ width: 60 }} /> */}
-                                    <img id={`img${row.firstName}`} src={`http://localhost:8000/${row.image}`} alt={`pic of ${row.firstName}`} style={{ width: 60, borderRadius: "50%" }} />
+                                    <img id={`img${row.firstName}`} src={`http://localhost:8000/${row.image}`} alt={`pic of ${row.firstName}`} style={{ width: 60, height:60, borderRadius: "50%" }} />
                                 </TableCell>
                                 {/* <TableCell width="10%" style={{ color: 'blue' }} component="th" scope="row" id={`id${row.id}`}>{index}</TableCell> */}
                                 <TableCell width="10%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.firstName+" "+row.lastName}</TableCell>

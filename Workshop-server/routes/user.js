@@ -1,4 +1,4 @@
-const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient, addEvent, getEvent } = require('../controllers/user');
+const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient, addEvent, getEvent, getTask } = require('../controllers/user');
 const authorization = require('../middleware/jwt-auth');
 const { requireAdmin, requireClient } = require('../middleware/userAuth');
 const fileUpload = require('../middleware/file-upload');

@@ -1,4 +1,4 @@
-import { Backdrop, Button, Fade, Grid, IconButton, makeStyles, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextareaAutosize, TextField, Typography } from '@material-ui/core';
+import { Backdrop, Button, Fade, Grid, IconButton, makeStyles, Modal, Table, TableBody, TableCell, TableContainer, TableRow, TextareaAutosize, TextField, Typography } from '@material-ui/core';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import EventBusyIcon from '@material-ui/icons/EventBusy';
 import React, { useEffect, useState } from 'react'
@@ -82,7 +82,7 @@ export default function CompanyDetails() {
     }
 
 
-
+    const [check, setCheck] = useState(false)
     const [rows, setRows] = useState([]);
     // const [data, setData] = useState([]);
 
@@ -121,7 +121,7 @@ export default function CompanyDetails() {
                 </div>
             </div>
 
-            {!rows &&
+            {!check &&
                 <div style={{ justifyContent: 'center', marginBlockStart: '10%', alignItems: 'center', textAlign: 'center' }}>
                     <EventBusyIcon style={{ color: 'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }} />
                     <p style={{ color: 'darkgray' }}>No Upcoming Events</p>
@@ -131,28 +131,31 @@ export default function CompanyDetails() {
 
             <TableContainer style={{ border: '0px solid', marginTop: '30px', borderBottom: "none" }}>
                 <Table className={classes.table} style={{ width: '100%', border: 'none', borderBottom: "none" }} aria-label="simple table">
-                    <TableHead style={{ border: '1px dotted lightblue ', borderBottom: "none" }}>
-                        <TableRow style={{ borderBottom: "none", color: 'blue' }}>
-                            {/* <TableCell width={'5%'} style={{  }}><b>Id</b></TableCell> */}
-                            <TableCell align="left" style={{ color: 'gray' }} width={'40%'}>Event</TableCell>
-                            <TableCell align="left" style={{ color: 'gray', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>Description</TableCell>
-                        </TableRow>
-                    </TableHead>
+                    {/* <TableHead style={{ border: '1px dotted rgb(55,55,200, .2) ', borderBottom: "none" }}> */}
+                    {/* <hr style={{opacity:'.1'}}></hr> */}
+                    {check && <TableRow style={{ borderBottom: "none" }}>
+                        {/* <TableCell width={'5%'} style={{  }}><b>Id</b></TableCell> */}
+                        <TableCell align="left" style={{}} width={'50%'}><b>Event</b></TableCell>
+                        <TableCell align="left" style={{ justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}><b>Description</b></TableCell>
+
+                    </TableRow>}
+                    {/* </TableHead> */}
                     <TableBody>
                         {rows.map((row) => (
                             <TableRow key={row.firstName} style={{ borderBottom: "none", }}>
+                                {!check && setCheck(true)}
                                 {/* <TableCell style={{ borderBottom: "none" }} component="th" scope="row">{index}</TableCell> */}
-                                <TableCell align="left" style={{ borderBottom: "none", color: 'lightblue' }}>
+                                <TableCell align="left" style={{ borderBottom: "none", color: 'darkgray' }}>
                                     {/* <IconButton>
                                         <img id={`img${row.image}`} src={`http://localhost:8000/${row.image}`} alt={`pic of ${row.image}`} style={{ width: 30, height: 30, borderRadius: '50%' }} />
                                     </IconButton> */}
-                                    <i style={{ cursor: 'pointer' }} >{row.name}</i>
+                                    {row.name}
                                 </TableCell>
                                 {/* <TableCell align="left" style={{ borderBottom: "none" }}>{row.idNumber}</TableCell>
                                 <TableCell align="left" style={{ borderBottom: "none" }}>{row.operationalArea}</TableCell>
                                 <TableCell width={1} align="left" style={{ cursor: 'pointer', borderBottom: "none" }} ><IconButton ><EditIcon style={{ color: '#00dff1' }} /></IconButton></TableCell> */}
-                                <TableCell align="right" style={{ borderBottom: "none", color: 'lightblue' }} >
-                                    <i style={{ cursor: 'pointer' }} >{row.description}</i>
+                                <TableCell align="left" style={{ borderBottom: "none", color: 'darkgray' }} >
+                                    {row.description}
 
                                 </TableCell>
                             </TableRow>

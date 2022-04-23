@@ -83,7 +83,18 @@ const staffSchema = new mongoose.Schema({
     checkedIn: {
         type: String,
         default: 'Not Checked in'
-    }
+    },
+    task: [{
+        name: {
+            type:String
+        },
+        status: {
+            type:String
+        },
+        dueDate: {
+            type:Date
+        },
+    }],
 });
 
 module.exports = mongoose.model('staff', staffSchema);

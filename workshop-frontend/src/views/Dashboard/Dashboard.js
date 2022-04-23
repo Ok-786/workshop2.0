@@ -10,6 +10,7 @@ import Map from '../../components/Map/Map';
 import Shop from '../../components/Shop/Shop';
 import ClientsMultitabs from '../../components/ClientsMultitabs/Multitabs';
 import Multitabs from '../../components/EmployeeMultitabs/Multitabs';
+import ReportsMultitab from '../../components/Reports/ReportsMultitab';
 
 export default function Dashboard() {
 
@@ -36,6 +37,7 @@ export default function Dashboard() {
                 shop={<Shop />}
                 client={<ClientsMultitabs />}
                 employee={<Multitabs />}
+                reports={<ReportsMultitab />}
 
             />
         </Fragment>
