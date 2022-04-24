@@ -1,4 +1,4 @@
-const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient, addEvent, getEvent, getTask } = require('../controllers/user');
+const { createAdmin, adminDashboard, signin, adminAuth, addProduct, verifyToken, getProducts, addStaff, addClient, getStaff, getClient, deleteStaff, deleteClient, updateStaff, getAdmin, updateAdmin, addExpense, getExpense, deleteExpense, updateExpense, updateClient, addEvent, getEvent, getTask, deleteProduct, updateProducts } = require('../controllers/user');
 const authorization = require('../middleware/jwt-auth');
 const { requireAdmin, requireClient } = require('../middleware/userAuth');
 const fileUpload = require('../middleware/file-upload');
@@ -19,8 +19,10 @@ router.get('/event/', authorization, requireAdmin, getEvent);
 router.patch('/staff/update', authorization, requireAdmin, updateStaff);
 router.patch('/expense/update', authorization, requireAdmin, updateExpense);
 router.patch('/admin/update', authorization, requireAdmin, updateAdmin);
+router.patch('/products/update', authorization, requireAdmin, updateProducts);
 router.delete('/staff/delete', authorization, requireAdmin, deleteStaff);
 router.delete('/expense/delete', authorization, requireAdmin, deleteExpense);
+router.delete('/products/delete', authorization, requireAdmin, deleteProduct);
 router.delete('/client/delete', authorization, requireAdmin, deleteClient);
 router.get('/client/', authorization, requireAdmin, getClient);
 router.post('/staff/create', authorization, requireAdmin, fileUpload.single('file'), addStaff);

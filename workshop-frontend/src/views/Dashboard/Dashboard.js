@@ -11,6 +11,11 @@ import Shop from '../../components/Shop/Shop';
 import ClientsMultitabs from '../../components/ClientsMultitabs/Multitabs';
 import Multitabs from '../../components/EmployeeMultitabs/Multitabs';
 import ReportsMultitab from '../../components/Reports/ReportsMultitab';
+import Inventory from '../../components/Inventory/Inventory';
+import ManagePricing from '../../components/ManagePricing/ManagePricing';
+import Orders from '../../components/Orders/Orders';
+import Advertising from '../../components/Advertising/Advertising';
+import Feedback from '../../components/Feedback/Feedback';
 
 export default function Dashboard() {
 
@@ -38,6 +43,11 @@ export default function Dashboard() {
                 client={<ClientsMultitabs />}
                 employee={<Multitabs />}
                 reports={<ReportsMultitab />}
+                inventory={<Inventory />}
+                managePricing={<ManagePricing />}
+                orders={<Orders />}
+                advertising={<Advertising />}
+                feedback={<Feedback />}
 
             />
         </Fragment>

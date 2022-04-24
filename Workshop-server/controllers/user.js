@@ -154,6 +154,7 @@ module.exports.addProduct = async (req, res) => {
     console.log(name + 'sdadadadadadadsadadadaaaaa');
     if (!req.file) return res.send('Please upload a file');
 
+    console.log(details)
     let product = new Product({
         name,
         type,
@@ -166,15 +167,15 @@ module.exports.addProduct = async (req, res) => {
         part_ID,
         make,
         image: req.file.path,
-        details
+        description: details
     })
 
     var user;
     var id = req.user.id;
-    console.log(id)
+    console.log(user)
     try {
         user = await User.findById(id);
-        console.log(user)
+        console.log(product)
     } catch (error) {
         return res.status(500).json(error.message)
     }
@@ -190,7 +191,7 @@ module.exports.addProduct = async (req, res) => {
         await product.save({ session: sess });
         user.products.push(product); //this push is the method of mongoose not array, it takes the id from the staff and stores it in user
         await user.save({ session: sess });
-        console.log("im a not found")
+        console.log(product)
         await sess.commitTransaction();
     } catch (error) {
         console.log(error.message)
@@ -261,7 +262,7 @@ module.exports.addEvent = async (req, res) => {
         return res.status(500).json("Server Error!");
     }
     console.log(a)
-    return res.json({message:"New Event Added Sucessfully"});
+    return res.json({ message: "New Event Added Sucessfully" });
 
 };
 
@@ -679,6 +680,73 @@ module.exports.getProducts = async (req, res) => {
     // }
 };
 
+
+
+module.exports.deleteProduct = async (req, res) => {
+    var id = req.header('id');
+    console.log('isWorking' + id);
+    let product;
+    try {
+        product = await (await Product.findOneAndRemove({ _id: id })).populate('creator')
+        console.log('staff', product)
+        // delete = await User.deleteOne(where)
+    } catch (err) {
+        console.log(err.message)
+        return res.json(err.message);
+    }
+
+    // try {
+    //     // const sess = await mongoose.startSession();
+    //     // sess.startTransaction();
+    //     await product.remove({ session: sess });
+    //     console.log(product.creator);
+    //     product.creator.products.pull(product);
+    //     console.log('sdadadadadadsadad');
+    //     await product.creator.save({ session: sess });
+    //     await sess.commitTransaction();
+    // } catch (err) {
+    //     console.log(err.message);
+    //     return res.json(err.message);
+    // }
+
+    return res.json(`Client with Email (${product.name}) Deleted`);
+
+}
+
+
+
+
+module.exports.updateProducts = async (req, res) => {
+    var obj = {
+        name: await req.header('name'),
+        type: await req.header('type'),
+        brand: await req.header('brand'),
+        saleprice: await req.header('saleprice'),
+        retailprice: await req.header('retailprice'),
+        part_ID: await req.header('part_ID'),
+        quantity: await req.header('quantity'),
+        model: await req.header('model'),
+        modelYear: await req.header('modelYear'),
+        make: await req.header('make'),
+        description: await req.header('description'),
+        discount: await req.header('discount'),
+    }
+    let id = await req.header('id');
+    console.log(obj, id)
+    // console.log(id);
+    var user1 = null;
+    try {
+        // user = await User.
+        user1 = await Product.findByIdAndUpdate(id, obj, { new: true })
+        console.log(user1)
+        return res.json({ message: `${obj.name} Updated` });
+    } catch (err) {
+        return res.json('Could not find expense!');
+    }
+}
+
+
+
 module.exports.getStaff = async (req, res) => {
     console.log('llolollo')
     try {
@@ -730,6 +798,7 @@ module.exports.deleteClient = async (req, res) => {
     return res.json(`Client with Email (${email}) Deleted`);
 
 }
+
 
 
 module.exports.deleteStaff = async (req, res) => {

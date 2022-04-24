@@ -1,4 +1,4 @@
-import { Backdrop, Fade, IconButton, makeStyles, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextareaAutosize, Typography } from '@material-ui/core';
+import { Backdrop, Fade, IconButton, makeStyles, Modal, Table, TableBody, TableCell, TableContainer,  TableRow, TextareaAutosize, Typography } from '@material-ui/core';
 import Add from '@material-ui/icons/Add';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
@@ -23,9 +23,9 @@ export default function LeaveRequest() {
     const [open, setOpen] = React.useState(false);
     const classes = useStyles();
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
+    // const handleOpen = () => {
+    //     setOpen(true);
+    // };
 
     const handleClose = () => {
         setOpen(false);

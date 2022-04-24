@@ -226,7 +226,7 @@ export default function Sidebar(props) {
                                                             <span style={{color:'gray'}} >Inventory</span>
                                                         </ListItem>
                                                         <ListItem button onClick={() => {
-                                                            props.setSelectedComponent('Manage pricing')
+                                                            props.setSelectedComponent('Manage Pricing')
                                                         }} className={classes.dropDownPanel} key={text}>
                                                             <ListItemIcon>{index === 4 && <LocalAtmOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
                                                             <span style={{color:'gray'}} >Manage pricing</span>
@@ -351,6 +351,11 @@ export default function Sidebar(props) {
                     {props.selectedComponent === 'Clients' && props.client}
                     {props.selectedComponent === 'Employees' && props.employee}
                     {props.selectedComponent === 'Reports' && props.reports}
+                    {props.selectedComponent === 'Inventory' && props.inventory}
+                    {props.selectedComponent === 'Manage Pricing' && props.managePricing}
+                    {props.selectedComponent === 'Orders' && props.orders}
+                    {props.selectedComponent === 'Advertising' && props.advertising}
+                    {props.selectedComponent === 'Feedback' && props.feedback}
                 </main>
             </div>
         </Fragment>
