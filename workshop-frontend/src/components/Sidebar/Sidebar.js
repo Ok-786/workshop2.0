@@ -209,11 +209,11 @@ export default function Sidebar(props) {
                                                 }} className={classes.dropDownPanel} key={text}>
                                                     <ListItemIcon>{index === 4 && <LocalMallOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
                                                     <ListItemText primary={text} />
-                                                    
+
                                                     {drop ?
-                                                        <ListItemIcon>{index === 4 && <ExpandLessIcon style={{marginLeft:'25px'}} className={classes.drawerIcon} />}</ListItemIcon>
+                                                        <ListItemIcon>{index === 4 && <ExpandLessIcon style={{ marginLeft: '25px' }} className={classes.drawerIcon} />}</ListItemIcon>
                                                         :
-                                                        <ListItemIcon>{index === 4 && <ExpandMoreIcon style={{marginLeft:'25px'}} className={classes.drawerIcon} />}</ListItemIcon>
+                                                        <ListItemIcon>{index === 4 && <ExpandMoreIcon style={{ marginLeft: '25px' }} className={classes.drawerIcon} />}</ListItemIcon>
                                                     }
 
                                                 </ListItem>
@@ -223,31 +223,31 @@ export default function Sidebar(props) {
                                                             props.setSelectedComponent('Inventory')
                                                         }} className={classes.dropDownPanel} key={text}>
                                                             <ListItemIcon>{index === 4 && <StorefrontOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
-                                                            <span style={{color:'gray'}} >Inventory</span>
+                                                            <span style={{ color: 'gray' }} >Inventory</span>
                                                         </ListItem>
                                                         <ListItem button onClick={() => {
                                                             props.setSelectedComponent('Manage Pricing')
                                                         }} className={classes.dropDownPanel} key={text}>
                                                             <ListItemIcon>{index === 4 && <LocalAtmOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
-                                                            <span style={{color:'gray'}} >Manage pricing</span>
+                                                            <span style={{ color: 'gray' }} >Manage pricing</span>
                                                         </ListItem>
                                                         <ListItem button onClick={() => {
                                                             props.setSelectedComponent('Orders')
                                                         }} className={classes.dropDownPanel} key={text}>
                                                             <ListItemIcon>{index === 4 && <LocalGroceryStoreOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
-                                                            <span style={{color:'gray'}} >Orders</span>
+                                                            <span style={{ color: 'gray' }} >Orders</span>
                                                         </ListItem>
                                                         <ListItem button onClick={() => {
                                                             props.setSelectedComponent('Advertising')
                                                         }} className={classes.dropDownPanel} key={text}>
                                                             <ListItemIcon>{index === 4 && <LiveTvOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
-                                                            <span style={{color:'gray'}} >Advertising</span>
+                                                            <span style={{ color: 'gray' }} >Advertising</span>
                                                         </ListItem>
                                                         <ListItem button onClick={() => {
                                                             props.setSelectedComponent('Feedback')
                                                         }} className={classes.dropDownPanel} key={text}>
                                                             <ListItemIcon>{index === 4 && <FeedbackOutlinedIcon className={classes.drawerIcon} />}</ListItemIcon>
-                                                            <span style={{color:'gray'}} >Feedback</span>
+                                                            <span style={{ color: 'gray' }} >Feedback</span>
                                                         </ListItem>
                                                     </Fragment>
                                                 }
@@ -339,8 +339,8 @@ export default function Sidebar(props) {
                 <main className={classes.content}>
                     <div className={classes.toolbar2} />
                     <div style={{ display: 'inline-flex', cursor: 'pointer' }}>
-                        {props.selectedComponent !== 'Dashboard' && <p style={{ color: 'darkblue' }} onClick={() => props.setSelectedComponent('Dashboard')}>Home &nbsp; {' > '}&nbsp;</p>}
-                        {props.selectedComponent !== 'Dashboard' && <p onClick={() => props.setSelectedComponent(props.selectedComponent)}> {props.selectedComponent}</p>}
+                        {props.selectedComponent !== 'Dashboard' && props.selectedComponent !== 'Live' &&<p style={{ color: 'darkblue' }} onClick={() => props.setSelectedComponent('Dashboard')}>Home &nbsp; {' > '}&nbsp;</p>}
+                        {props.selectedComponent !== 'Dashboard' && props.selectedComponent !== 'Live' && <p onClick={() => props.setSelectedComponent(props.selectedComponent)}> {props.selectedComponent}</p>}
                     </div>
                     {props.selectedComponent === 'Dashboard' && props.dashboard}
                     {props.selectedComponent === 'Requests' && props.requests}

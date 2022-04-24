@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { Avatar, Box, Modal, Tooltip } from '@material-ui/core';
 // import image from '../../Images/i1.jpg';
 import '../../index.css';
-import Filter from '../Dashboard/Filter/Filter';
+// import Filter from '../Dashboard/Filter/Filter';
 import { withStyles } from '@material-ui/styles';
 
 export default function EmployeeMap() {
@@ -82,7 +82,7 @@ export default function EmployeeMap() {
     return (
         <React.Fragment>
             {/* <Filter setSelectedFilter={setSelectedFilter} /> */}
-            <ReactMapGL {...viewport} width="100%" height="72vh" mapStyle='mapbox://styles/mapbox/streets-v11' style={{ border:'5px rgb(103,146,245,.8) solid', borderRadius:'15px',color: 'red', lineColor: "green", }} onViewportChange={setViewport} mapboxApiAccessToken='pk.eyJ1Ijoib2stNzg2IiwiYSI6ImNrdHBsN2EzazAyNngzMWtndjE0ajF0YjMifQ.EH_h1lGgFsCHiaFK4uTSJQ' mapboxAccessToken='pk.eyJ1Ijoib2stNzg2IiwiYSI6ImNrdHBsN2EzazAyNngzMWtndjE0ajF0YjMifQ.EH_h1lGgFsCHiaFK4uTSJQ'>
+            <ReactMapGL {...viewport} width="100%" height="72vh" mapStyle='mapbox://styles/mapbox/streets-v11' style={{ border: '5px rgb(103,146,245,.8) solid', borderRadius: '15px', color: 'red', lineColor: "green", }} onViewportChange={setViewport} mapboxApiAccessToken='pk.eyJ1Ijoib2stNzg2IiwiYSI6ImNrdHBsN2EzazAyNngzMWtndjE0ajF0YjMifQ.EH_h1lGgFsCHiaFK4uTSJQ' mapboxAccessToken='pk.eyJ1Ijoib2stNzg2IiwiYSI6ImNrdHBsN2EzazAyNngzMWtndjE0ajF0YjMifQ.EH_h1lGgFsCHiaFK4uTSJQ'>
                 {(selectedFilter === 'All' || selectedFilter === 'Clients') && clients.map((client) => (
                     <Marker longitude={Number(client.longitude.toFixed(1)) - 0.00001 + Number(Math.random().toFixed(1))} latitude={Number(client.latitude.toFixed(1)) - 0.00001 + Number(Math.random().toFixed(1))} offsetLeft={-20} offsetTop={-10}>
                         <div style={{ borderRadius: '25px', padding: '6px' }} id='myDIV2' >

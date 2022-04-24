@@ -10,7 +10,7 @@ import clsx from 'clsx';
 import ManageOrders from './‏‏‏‏ManageOrders/ManageOrders';
 import OrderReports from './OrderReports/OrderReports';
 // import HeapMap from './HeatMap/HeatMap';
-import HeatMap from './HeatMap/HeatMap';
+// import HeatMap from './HeatMap/HeatMap';
 // import Reports from './Reports';
 
 function TabPanel(props) {
@@ -83,7 +83,7 @@ export default function OrdersMultitab() {
 
 
                 >
-                    <LinkTab className={classes.insideTabLeft} label={(value === 0 && 'Manage Orders') || (value === 1 && 'Order Reports') || (value === 2 && 'Heat Map')} />
+                    <LinkTab className={classes.insideTabLeft} label={(value === 0 && 'Manage Orders') || (value === 1 && 'Order Reports') } />
                     <LinkTab
                         label="Manage Orders" href="/drafts" {...a11yProps(0)}
                         className={clsx({
@@ -92,7 +92,7 @@ export default function OrdersMultitab() {
                         })}
                     />
                     <LinkTab className={classes.insideTabRight} label="Order Reports" href="/trash" {...a11yProps(1)} />
-                    <LinkTab className={classes.insideTabRight} label="Heat Map" href="/spam" {...a11yProps(2)} />
+                    {/* <LinkTab className={classes.insideTabRight} label="Heat Map" href="/spam" {...a11yProps(2)} /> */}
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0} >
@@ -102,7 +102,7 @@ export default function OrdersMultitab() {
                 <OrderReports />
             </TabPanel>
             <TabPanel value={value} index={2} >
-                <HeatMap />
+                {/* <HeatMap /> */}
             </TabPanel>
 
         </div>
