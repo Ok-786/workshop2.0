@@ -55,11 +55,11 @@ const staffSchema = new mongoose.Schema({
     },
     longitude: {
         type: SchemaTypes.Double,
-        default: 73.0961 - Math.random().toFixed(3) 
+        default: 73.0715
     },
     latitude: {
         type: SchemaTypes.Double,
-        default: 33.5163 + Math.random() 
+        default: 33.5611
     },
     timeoffLeaves: {
         default: 2,
