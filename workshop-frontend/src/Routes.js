@@ -4,8 +4,9 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Dashboard from './views/Dashboard/Dashboard';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { SigninContext } from './storage/SigninContext';
 
-export const SigninContext = createContext(false);
+
 toast.configure();
 
 
