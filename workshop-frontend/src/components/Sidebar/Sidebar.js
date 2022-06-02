@@ -190,7 +190,7 @@ export default function Sidebar(props) {
                                     [classes.hide]: !open,
                                 })}
                                 style={{ marginLeft: '10px', color: 'gray' }}>Your Company</h4>
-                            {['Live', 'Employees', 'Clients', 'Reports', 'Store'].map((text, index) => {
+                            {['Live', 'Employees', 'Clients', 'Appointments', 'Store'].map((text, index) => {
                                 switch (text) {
                                     case "Live":
                                         return (
@@ -262,7 +262,7 @@ export default function Sidebar(props) {
                                                 <ListItemText primary={text} />
                                             </ListItem>
                                         )
-                                    case "Reports":
+                                    case "Appointments":
                                         return (
                                             <ListItem button onClick={() => {
                                                 props.setSelectedComponent('Reports')
