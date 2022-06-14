@@ -11,8 +11,10 @@ const nodemailer = require(`nodemailer`);
 const Product = require("../models/products");
 const Staff = require("../models/staff");
 const Client = require("../models/client");
+const Orders = require('../models/orders');
 const Expense = require("../models/expense")
-const Event = require("../models/event")
+const Event = require("../models/event");
+const appointments = require('../models/appointments');
 require(`dotenv`).config();
 
 var transporter = nodemailer.createTransport({
@@ -535,6 +537,33 @@ module.exports.updateClient = async (req, res) => {
 }
 
 
+module.exports.updateTask = async (req, res) => {
+    const disabled1 = await req.header('status');
+    let id = await req.header('id');
+    console.log(disabled1)
+    var user1 = null;
+    try {
+        // user = await User.
+        user1 = await appointments.findByIdAndUpdate(id, { status: disabled1 }, { new: true })
+        console.log(user1)
+        return res.json('done');
+    } catch (err) {
+        return res.json('Could not find appointment!');
+    }
+}
+
+module.exports.getOrders = async (req, res) => {
+    try {
+        // user = await User.
+        orders = await Orders.find()
+        console.log(orders)
+        return res.json({ client: orders });
+    } catch (err) {
+        return res.json('Could not find order!');
+    }
+}
+
+
 
 module.exports.updateAdmin = async (req, res) => {
     console.log('i am in update Admin')
@@ -742,6 +771,34 @@ module.exports.updateProducts = async (req, res) => {
         return res.json({ message: `${obj.name} Updated` });
     } catch (err) {
         return res.json('Could not find expense!');
+    }
+}
+
+
+
+module.exports.getTasks = async (req, res) => {
+    console.log('llolollo')
+    try {
+        var task = await appointments.find();
+        var client = [];
+        console.log('task.length')
+        console.log(task.length)
+        for (var i = 0; i < task.length; i++) {
+            client.push(await Client.findById(task[i].cid))
+        }
+
+        // console.log('task')
+        // console.log(task)
+        // console.log('client');
+        // console.log('clientcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc');
+        // console.log(client);
+        // console.log({ staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) })
+        // console.log({ staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) })
+        // return res.json({ staff: userWithStaff.staff.map(staff => staff.toObject({ getters: true })) });
+        return res.json({ client: client, task: task });
+
+    } catch (err) {
+        return res.status(500).json(err.message);
     }
 }
 
