@@ -1,4 +1,4 @@
-import { Backdrop,  Fade, IconButton, makeStyles, Modal, Table, TableBody, TableCell, TableContainer, TableRow, TextareaAutosize, Typography } from '@material-ui/core';
+import { Backdrop, Fade, IconButton, makeStyles, Modal, Table, TableBody, TableCell, TableContainer, TableRow, TextareaAutosize, Typography } from '@material-ui/core';
 import SettingsBackupRestoreIcon from '@material-ui/icons/SettingsBackupRestore';
 import AllInboxIcon from '@material-ui/icons/AllInbox';
 import Add from '@material-ui/icons/Add';
@@ -33,26 +33,38 @@ export default function TaskList() {
     };
 
     const [tasks, setTasks] = useState([])
+    const [client, setClient] = useState([])
 
     const [check, setCheck] = useState(false)
 
     useEffect(() => {
         async function callApi() {
-            const response = await fetch('http://localhost:8000/api/auth/staff/', {
-                headers: { token: localStorage.token }
+            const response = await fetch('http://localhost:8000/api/auth/tasks/', {
+                headers: { token: localStorage.token },
             });
 
             const parseRes = await response.json();
             console.log('sssssssssssssssssssssssssss')
-            console.log(parseRes.staff)
-            setTasks(parseRes.staff);
+            console.log(parseRes)
+
+
+
+            setClient(parseRes.client);
+            console.log(parseRes.client);
+            setTasks(parseRes.task);
             // setData(parseRes.staff);
 
         }
 
         callApi();
-    }, [])
 
+        console.log('asdadasdasdaijdajdioajoifajdioa')
+    }, [])
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaa')
+    console.log(tasks)
+    console.log('ccccccccccccc')
+    console.log(client)
 
     return (
         <div >
@@ -71,7 +83,8 @@ export default function TaskList() {
                 </div>
             </div>
 
-            {!check &&
+            {
+                !check &&
                 <div style={{ justifyContent: 'center', marginBlockStart: '10%', alignItems: 'center', textAlign: 'center' }}>
                     <AllInboxIcon style={{ color: 'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }} />
                     <p style={{ color: 'darkgray' }}>No Pending Tasks</p>
@@ -90,22 +103,19 @@ export default function TaskList() {
                     }
                     {/* </TableHead> */}
                     <TableBody>
-                        {tasks.map((r, index) => (
+                        {tasks.map((row, index) => (
                             <Fragment>
-                                {r.task.map((row, index2) => (
-                                    <Fragment>
-                                        {row.status === 'pending' &&
-                                            <TableRow key={r.firstName + r.lastName} style={{ color: '#80a4f1' }}>
-                                                {!check && setCheck(true)}
-                                                <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                    <div style={{ color: 'darkgray' }}>&nbsp;&nbsp;&nbsp;&nbsp;{row.name}</div>
-                                                </TableCell>
-                                                <TableCell align="center" style={{ borderBottom: "none", color: 'darkgray' }}>{row.dueDate && row.dueDate.split('T')[0]}</TableCell>
+                                {console.log(row)}
+                                {row.status === 'pending' &&
+                                    <TableRow key={client[index].firstName + client[index].lastName} style={{ color: '#80a4f1' }}>
+                                        {!check && setCheck(true)}
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>
+                                            <div style={{ color: 'darkgray' }}>&nbsp;&nbsp;&nbsp;&nbsp;{client[index].firstName}</div>
+                                        </TableCell>
+                                        <TableCell align="center" style={{ borderBottom: "none", color: 'darkgray' }}>{row.date}</TableCell>
 
-                                            </TableRow>
-                                        }
-                                    </Fragment>
-                                ))}
+                                    </TableRow>
+                                }
                             </Fragment>
                         ))}
 
@@ -144,6 +154,6 @@ export default function TaskList() {
                 </Fade>
             </Modal>
 
-        </div>
+        </div >
     )
 }

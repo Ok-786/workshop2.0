@@ -1,8 +1,9 @@
 
-import { Button, FormControl, Grid, makeStyles, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
+import { Button, FormControl, Grid, IconButton, makeStyles, MenuItem, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
 import React, { Fragment, useEffect, useState } from 'react'
 import { XAxis, YAxis, Tooltip, ResponsiveContainer, Bar, Legend, BarChart } from 'recharts';
-
+import BlockIcon from '@material-ui/icons/Block';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 // const data = [
 //     { name: 'April', uv: 400, pv: 2400, amt: 2400 },
 //     { name: 'May', uv: 500, pv: 1400, amt: 3400 },
@@ -15,33 +16,53 @@ import { XAxis, YAxis, Tooltip, ResponsiveContainer, Bar, Legend, BarChart } fro
 
 const RenderLineChart = (props) => {
     const [rows, setRows] = useState([]);
-
+    const [tasks, setTasks] = useState([]);
+    const [client, setClient] = useState([]);
     useEffect(() => {
+        // async function callApi() {
+        //     const response = await fetch('http://localhost:8000/api/auth/tasks/', {
+        //         headers: { token: localStorage.token },
+        //     });
+
+        //     const parseRes = await response.json();
+        //     console.log('sssssssssssssssssssssssssss')
+        //     console.log(parseRes)
+
+
+
+        //     setClient(parseRes.client);
+        //     console.log(parseRes.client);
+        //     setTasks(parseRes.task);
+        //     // setData(parseRes.staff);
+
+        // }
+
+        // callApi();
+
         async function callApi() {
-            const response = await fetch('http://localhost:8000/api/auth/staff/', {
-                headers: { token: localStorage.token }
+            const response = await fetch('http://localhost:8000/api/auth/tasks/', {
+                headers: { token: localStorage.token },
             });
 
             const parseRes = await response.json();
             console.log('sssssssssssssssssssssssssss')
-            console.log(parseRes.staff)
+            setTasks(parseRes.task)
+            setClient(parseRes.client)
 
 
             var c = 0;
             var p = 0;
             var ip = 0;
+            console.log(parseRes.task)
+            for (var i in parseRes.task) {
+                // if (parseRes.task[i].status) {
+                if (parseRes.task[i].status.toLowerCase() === "pending") { p = p + 1 };
+                if (parseRes.task[i].status.toLowerCase() === "accepted") { c = c + 1 };
+                if (parseRes.task[i].status.toLowerCase() === "rejected") { ip = ip + 1 };
+                // }
 
-            for (var i in parseRes.staff) {
-                console.log(parseRes.staff[i].task[0])
-                for (var k in parseRes.staff[i].task) {
-                    console.log(parseRes.staff[i].task[k].status)
-                    if (parseRes.staff[i].task[k].status) {
-                        if (parseRes.staff[i].task[k].status === "pending") { p = +1 };
-                        if (parseRes.staff[i].task[k].status === "completed") { c = +1 };
-                        if (parseRes.staff[i].task[k].status === "in progress") { ip = +1 };
-                    }
-                }
             }
+            console.log('c, p, ip')
             console.log(c, p, ip)
             var obj
             if (props.state === 'all') {
@@ -51,11 +72,11 @@ const RenderLineChart = (props) => {
                         uv: p
                     },
                     {
-                        name: "completed",
+                        name: "accepted",
                         pv: c
                     },
                     {
-                        name: "in progress",
+                        name: "rejected",
                         lv: ip
                     },
                 ]
@@ -68,18 +89,18 @@ const RenderLineChart = (props) => {
                     },
                 ]
             }
-            if (props.state === 'completed') {
+            if (props.state === 'accepted') {
                 obj = [
                     {
-                        name: "completed",
+                        name: "rejected",
                         pv: c
                     },
                 ]
             }
-            if (props.state === 'in progress') {
+            if (props.state === 'completed') {
                 obj = [
                     {
-                        name: "in progress",
+                        name: "completed",
                         lv: ip
                     },
                 ]
@@ -94,15 +115,15 @@ const RenderLineChart = (props) => {
     return (
         <div style={{ width: '100%' }}>
             <ResponsiveContainer width="95%" height={200}>
-                <BarChart  height={250} data={rows} >
+                <BarChart height={250} data={rows} >
                     {/* <CartesianGrid strokeDasharray="1 1" /> */}
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="pv" fill="#3f51b5"  style={{ opacity: '1', justifyContent:'center', alignItems:'center', textAlign:'center' }} />
+                    <Bar dataKey="pv" fill="green" style={{ opacity: '1', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }} />
                     <Bar dataKey="uv" fill="orange" />
-                    <Bar dataKey="lv" fill="green" />
+                    <Bar dataKey="lv" fill="red" />
                 </BarChart>
             </ResponsiveContainer>
         </div>
@@ -151,23 +172,65 @@ export default function Reports() {
 
 
     const [rows, setRows] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    const [client, setClient] = useState([]);
+    const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
         async function callApi() {
-            const response = await fetch('http://localhost:8000/api/auth/staff/', {
-                headers: { token: localStorage.token }
+            const response = await fetch('http://localhost:8000/api/auth/tasks/', {
+                headers: { token: localStorage.token },
             });
 
             const parseRes = await response.json();
             console.log('sssssssssssssssssssssssssss')
-            console.log(parseRes.staff)
-            setRows(parseRes.staff);
+            setTasks(parseRes.task)
+            setClient(parseRes.client)
+            setRows(parseRes.task);
             // setData(parseRes.staff);
 
         }
 
         callApi();
     }, [])
+
+
+
+    const disabledHandler = async (row, status) => {
+        console.log(row);
+
+        try {
+            const response1 = await fetch('http://localhost:8000/api/auth/task/update', {
+                headers: {
+                    'token': localStorage.token,
+                    'id': row._id,
+                    'status': status
+                },
+                method: 'PATCH'
+            });
+            console.log(response1)
+        } catch (err) {
+            console.log(err)
+        }
+
+        async function callApi() {
+            const response = await fetch('http://localhost:8000/api/auth/tasks/', {
+                headers: { token: localStorage.token },
+            });
+
+            const parseRes = await response.json();
+            console.log('sssssssssssssssssssssssssss')
+            setTasks(parseRes.task)
+            setClient(parseRes.client)
+            setRows(parseRes.task);
+            // setData(parseRes.staff);
+
+        }
+
+        callApi();
+
+    }
+
 
     const classes = useStyles();
 
@@ -189,11 +252,11 @@ export default function Reports() {
                             name="Type"
                             style={{ height: '37px', border: '1px solid lightgray' }}
 
-                            defaultValue={'completed'}
+                            defaultValue={'accepted'}
                         >
-                            <MenuItem value={'completed'}>Completed</MenuItem>
+                            <MenuItem value={'accepted'}>Accepted</MenuItem>
                             <MenuItem value={'pending'}>Pending</MenuItem>
-                            <MenuItem value={'in progress'}>In Progress</MenuItem>
+                            <MenuItem value={'rejected'}>Rejected</MenuItem>
                             <MenuItem value={'all'}>All</MenuItem>
                         </Select>
                     </FormControl>
@@ -217,32 +280,51 @@ export default function Reports() {
                                     <TableCell align="left" ><b>Task No</b></TableCell>
                                     <TableCell align="center" ><b>Status</b></TableCell>
                                     <TableCell align="center" ><b>Due Date</b></TableCell>
+                                    <TableCell align="center" ><b>Actions</b></TableCell>
 
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {rows.map((r, index) => (
+                                {rows.map((r, i) => (
                                     <Fragment>
-                                        {r.task.map((row, index2) => (
-                                            <Fragment>
-                                                {row.name &&
-                                                    <TableRow key={r.firstName + r.lastName} style={{ color: '#80a4f1' }}>
-                                                        <TableCell align="left" style={{ borderBottom: "none" }}>{r.firstName + " " + r.lastName}</TableCell>
-                                                        <TableCell align="left" style={{ borderBottom: "none" }}>{row.name}</TableCell>
-                                                        <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                            <div style={{ color: 'darkgray' }}>&nbsp;&nbsp;&nbsp;&nbsp;{index}{index2}</div>
-                                                        </TableCell>
-                                                        <TableCell align="center" style={{ borderBottom: "none" }}>
-                                                            {row.status === "completed" && <Button variant='outlined' size='small' style={{ width: '10vh', fontSize: '9px' }} color='primary'>{row.status}</Button>}
-                                                            {row.status === "pending" && <Button variant='outlined' size='small' style={{ color: 'orange', border: '1px solid orange', width: '10vh', fontSize: '9px' }}>{row.status}</Button>}
-                                                            {row.status === "in progress" && <Button variant='outlined' size='small' style={{ color: 'green', width: '10vh', border: '1px solid green', fontSize: '9px' }}>{row.status}</Button>}
-                                                        </TableCell>
-                                                        <TableCell align="center" style={{ borderBottom: "none" }}>{row.dueDate && row.dueDate.split('T')[0]}</TableCell>
+                                        {
+                                            <TableRow key={client[i].firstName + client[i].lastName} style={{ color: '#80a4f1' }}>
+                                                <TableCell align="left" style={{ borderBottom: "none" }}>{client[i].firstName + " " + client[i].lastName}</TableCell>
+                                                <TableCell align="left" style={{ borderBottom: "none" }}>{r.disc}</TableCell>
+                                                <TableCell align="left" style={{ borderBottom: "none" }}>
+                                                    <div style={{ color: 'darkgray' }}>&nbsp;&nbsp;&nbsp;&nbsp;{i}</div>
+                                                </TableCell>
+                                                <TableCell align="center" style={{ borderBottom: "none" }}>
+                                                    {r.status.toLowerCase() === "accepted" && <Button variant='outlined' size='small' style={{ width: '10vh', fontSize: '9px', color: 'green', border: '1px solid green' }} color='primary'>{r.status}</Button>}
+                                                    {
+                                                        <>
+                                                            {r.status.toLowerCase() === "pending" &&
+                                                                <Button onMouseOver={() => setIsActive(true)} variant='outlined' size='small' style={{ color: 'orange', border: '1px solid orange', width: '10vh', fontSize: '9px' }}>
+                                                                    {r.status}
+                                                                </Button>}
 
-                                                    </TableRow>
-                                                }
-                                            </Fragment>
-                                        ))}
+
+
+                                                        </>
+                                                    }
+                                                    {r.status.toLowerCase() === "rejected" && <Button variant='outlined' size='small' style={{ color: 'red', width: '10vh', border: '1px solid red', fontSize: '9px' }}>{r.status}</Button>}
+                                                </TableCell>
+                                                <TableCell align="center" style={{ borderBottom: "none" }}>{r.date}&nbsp; {r.time}</TableCell>
+                                                {r.status.toLowerCase() === "pending" && <TableCell align="center" style={{ borderBottom: "none" }}> <>
+                                                    <IconButton onClick={() => disabledHandler(r, "rejected")}>
+                                                        <BlockIcon onClick={() => { }} style={{ color: 'orange', cursor: 'pointer' }} />
+                                                    </IconButton>
+                                                    :
+                                                    <IconButton onClick={() => disabledHandler(r, "accepted")}>
+                                                        <CheckCircleIcon onClick={() => { }} style={{ color: '#2a5ab4', cursor: 'pointer' }} />
+                                                    </IconButton>
+                                                </></TableCell>}
+                                                <TableCell align="center" style={{ borderBottom: "none" }}>{r.status.toLowerCase() !== "pending" && <>
+                                                    --
+                                                </>}</TableCell>
+
+                                            </TableRow>
+                                        }
                                     </Fragment>
                                 ))}
 

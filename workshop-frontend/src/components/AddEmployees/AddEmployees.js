@@ -107,7 +107,7 @@ export default function AddEmployees(props) {
     });
 
     return (
-        <div >
+        <div className='full-top-con'>
             <form onSubmit={formik.handleSubmit} >
 
                 <Grid container spacing={2} style={{ color: 'gray' }}>

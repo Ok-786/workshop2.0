@@ -12,7 +12,7 @@ import SearchBar from "material-ui-search-bar";
 // import DeleteIcon from '@material-ui/icons/Delete';
 // import MoreVertIcon from '@material-ui/icons/MoreVert';
 
-import {  Button, FormControl, MenuItem,  Select } from "@material-ui/core";
+import { Button, FormControl, MenuItem, Select } from "@material-ui/core";
 // import AddEmployees from "../AddEmployees/AddEmployees";
 
 
@@ -107,20 +107,15 @@ export default function ManageOrders() {
     useEffect(() => {
         var parseRes = [];
         async function callApi() {
-            const response = await fetch('http://localhost:8000/api/auth/client/', {
+            const response = await fetch('http://localhost:8000/api/auth/orders/', {
                 headers: { token: localStorage.token }
             });
 
             parseRes = await response.json();
             console.log('qqqqqqqqqqqqqqqqqqqqq');
-            console.log(parseRes.client[0].products[0].order);
+            console.log(parseRes.client);
 
-            var arr = []
-            for (var i in parseRes.client) {
-                for (var j in parseRes.client[i].products) {
-                    arr.push(parseRes.client[i].products[j].order)
-                }
-            }
+            var arr = parseRes.client
 
             console.log(arr)
 
@@ -144,7 +139,7 @@ export default function ManageOrders() {
 
     //     // handleClose();
     //     try {
-            
+
     //         console.log(orders)
     //         const response1 = await fetch('http://localhost:8000/api/auth/client/update', {
     //             headers: {
@@ -198,12 +193,12 @@ export default function ManageOrders() {
 
     const requestSearch = (searchedVal) => {
         const filteredRows = data.filter((row) => {
-            return row.firstName.toLowerCase().includes(searchedVal.toLowerCase());
+            return row.client_id.firstName.toLowerCase().includes(searchedVal.toLowerCase());
         });
         setRows(filteredRows);
     };
 
-   
+
 
     const cancelSearch = () => {
         setSearched("");
@@ -254,68 +249,61 @@ export default function ManageOrders() {
                         <TableRow style={{ borderBottom: "none" }}>
                             {/* <TableCell width={'2%'}><b>Id</b></TableCell> */}
                             <TableCell align="left" ><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Client </b></TableCell>
-                            <TableCell align="left" ><b>Order Id</b></TableCell>
+                            <TableCell align="left" ><b>Price</b></TableCell>
                             <TableCell align="left" ><b>Order Status</b></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map((row, index) => (
                             <Fragment>
-                                {row.products.map((r, index1) => {
-                                    return (
-                                        <Fragment>
+                                {(state === 'All') &&
+                                    <TableRow key={row.client_id.firstName} style={{ color: '#80a4f1' }}>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>
+                                            <div >
+                                                {/* <img id={`img${row.image}`} src={`http://localhost:8000/${row.image}`} alt={`${row.name}`} style={{ width: 50, height: 50, borderRadius: '50%' }} /> */}
+                                                <div style={{ color: 'darkgray' }}>{row.client_id.firstName + ' ' + row.client_id.lastName}</div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>{row.bill}</TableCell>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>
+                                            {/* {r.status} */}
+                                            {((row.status === "dispached") || (row.status === "dispatched")) && <Button variant='outlined' size='small' style={{ width: '10vh', fontSize: '9px' }} color='primary'>{row.status}</Button>}
+                                            {row.status === "processing" && <Button variant='outlined' size='small' style={{ color: 'orange', border: '1px solid orange', width: '10vh', fontSize: '9px' }}>{row.status}</Button>}
+                                            {((row.status === "delivered") || (row.status === 'dilivered')) && <Button variant='outlined' size='small' style={{ color: 'green', width: '10vh', border: '1px solid green', fontSize: '9px' }}>{row.status}</Button>}
 
-                                            {(state === 'All') &&
-                                                <TableRow key={row.firstName} style={{ color: '#80a4f1' }}>
-                                                    <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                        <div >
-                                                            <img id={`img${row.image}`} src={`http://localhost:8000/${row.image}`} alt={`${row.name}`} style={{ width: 50, height: 50, borderRadius: '50%' }} />
-                                                            <div style={{ color: 'darkgray' }}>{row.firstName + ' ' + row.lastName}</div>
-                                                        </div>
-                                                    </TableCell>
-                                                    <TableCell align="left" style={{ borderBottom: "none" }}>{r.order}</TableCell>
-                                                    <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                        {/* {r.status} */}
-                                                        {((r.status === "dispached") || (r.status === "dispatched")) && <Button variant='outlined' size='small' style={{ width: '10vh', fontSize: '9px' }} color='primary'>{r.status}</Button>}
-                                                        {r.status === "pending" && <Button variant='outlined' size='small' style={{ color: 'orange', border: '1px solid orange', width: '10vh', fontSize: '9px' }}>{r.status}</Button>}
-                                                        {((r.status === "delivered") || (r.status === 'dilivered')) && <Button variant='outlined' size='small' style={{ color: 'green', width: '10vh', border: '1px solid green', fontSize: '9px' }}>{r.status}</Button>}
-
-                                                    </TableCell>
+                                        </TableCell>
 
 
-                                                </TableRow>
-                                            }
-                                            {(state === r.status) &&
-                                                <TableRow key={row.firstName} style={{ color: '#80a4f1' }}>
-                                                    <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                        <div >
-                                                            <img id={`img${row.image}`} src={`http://localhost:8000/${row.image}`} alt={`${row.name}`} style={{ width: 50, height: 50, borderRadius: '50%' }} />
-                                                            <div style={{ color: 'darkgray' }}>{row.firstName + ' ' + row.lastName}</div>
-                                                        </div>
-                                                    </TableCell>
-                                                    <TableCell align="left" style={{ borderBottom: "none" }}>{r.order}</TableCell>
-                                                    <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                        {/* {r.status} */}
-                                                        {((r.status === "dispached") || (r.status === "dispatched")) && <Button variant='outlined' size='small' style={{ width: '10vh', fontSize: '9px' }} color='primary'>{r.status}</Button>}
-                                                        {r.status === "pending" && <Button variant='outlined' size='small' style={{ color: 'orange', border: '1px solid orange', width: '10vh', fontSize: '9px' }}>{r.status}</Button>}
-                                                        {((r.status === "delivered") || (r.status === 'dilivered')) && <Button variant='outlined' size='small' style={{ color: 'green', width: '10vh', border: '1px solid green', fontSize: '9px' }}>{r.status}</Button>}
+                                    </TableRow>
+                                }
+                                {(state === row.status) &&
+                                    <TableRow key={row.client_id.firstName} style={{ color: '#80a4f1' }}>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>
+                                            <div >
+                                                {/* <img id={`img${row.image}`} src={`http://localhost:8000/${row.image}`} alt={`${row.name}`} style={{ width: 50, height: 50, borderRadius: '50%' }} /> */}
+                                                <div style={{ color: 'darkgray' }}>{row.client_id.firstName + ' ' + row.client_id.lastName}</div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>{row.bill}</TableCell>
+                                        <TableCell align="left" style={{ borderBottom: "none" }}>
+                                            {/* {r.status} */}
+                                            {((row.status === "dispached") || (row.status === "dispatched")) && <Button variant='outlined' size='small' style={{ width: '10vh', fontSize: '9px' }} color='primary'>{row.status}</Button>}
+                                            {row.status === "processing" && <Button variant='outlined' size='small' style={{ color: 'orange', border: '1px solid orange', width: '10vh', fontSize: '9px' }}>{row.status}</Button>}
+                                            {((row.status === "delivered") || (row.status === 'dilivered')) && <Button variant='outlined' size='small' style={{ color: 'green', width: '10vh', border: '1px solid green', fontSize: '9px' }}>{row.status}</Button>}
 
-                                                    </TableCell>
+                                        </TableCell>
 
 
-                                                </TableRow>
-                                            }
+                                    </TableRow>
+                                }
 
-                                        </Fragment>
-                                    )
-                                })}
                             </Fragment>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
             <div>
-                </div>
+            </div>
         </div>
     );
 }

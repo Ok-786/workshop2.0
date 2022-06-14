@@ -79,7 +79,7 @@ export default function ReportsMultitab() {
 
 
                 >
-                    <LinkTab className={classes.insideTabLeft} label={(value === 0 && 'Work') || (value === 1 && 'EXPENSE') || (value === 2 && 'PAYSLIP')} disabled />
+                    <LinkTab className={classes.insideTabLeft} label={(value === 0 && 'Work1') || (value === 1 && 'EXPENSE') || (value === 2 && 'PAYSLIP')} disabled />
                     <LinkTab
                         label="Work" href="/drafts" {...a11yProps(0)}
                         className={clsx({
@@ -94,7 +94,7 @@ export default function ReportsMultitab() {
             <TabPanel value={value} index={0} >
                 <Reports />
             </TabPanel>
-            
+
         </div>
     );
 }

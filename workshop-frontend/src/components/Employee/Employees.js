@@ -14,6 +14,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import { Box, Button, FormControl, IconButton, Menu, MenuItem, Modal, Select } from "@material-ui/core";
 import AddEmployees from "../AddEmployees/AddEmployees";
+import './Employees.css';
 
 
 const style = {
@@ -234,7 +235,7 @@ export default function Employees() {
         <div>
             <div style={{ display: 'flex' }}>
                 <SearchBar
-                    style={{ width: '15%',borderRadius:'15px',height:'37px', border: '1px solid lightgray' }}
+                    style={{ width: '15%', borderRadius: '15px', height: '37px', border: '1px solid lightgray' }}
                     value={searched}
                     onChange={(searchVal) => requestSearch(searchVal)}
                     onCancelSearch={() => cancelSearch()}
@@ -469,8 +470,8 @@ export default function Employees() {
                                 </form>
                             </div>
                             :
-                            <div style={{ background: 'white', borderRadius: '6px', paddingInline: '40px' }}>
-                                <AddEmployees handleClose={handleClose} setRefresh={setRefresh}/>
+                            <div className="full-top-con" >
+                                <AddEmployees handleClose={handleClose} setRefresh={setRefresh} />
                             </div>
                         }
                     </Box>
