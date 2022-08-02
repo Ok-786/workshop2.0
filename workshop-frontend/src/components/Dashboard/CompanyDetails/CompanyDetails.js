@@ -124,7 +124,7 @@ export default function CompanyDetails() {
             {!check &&
                 <div style={{ justifyContent: 'center', marginBlockStart: '10%', alignItems: 'center', textAlign: 'center' }}>
                     <EventBusyIcon style={{ color: 'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }} />
-                    <p style={{ color: 'darkgray' }}>No Upcoming Events</p>
+                    <p style={{ color: 'black' }}>No Upcoming Events</p>
                 </div>
             }
 
@@ -145,7 +145,7 @@ export default function CompanyDetails() {
                             <TableRow key={row.firstName} style={{ borderBottom: "none", }}>
                                 {!check && setCheck(true)}
                                 {/* <TableCell style={{ borderBottom: "none" }} component="th" scope="row">{index}</TableCell> */}
-                                <TableCell align="left" style={{ borderBottom: "none", color: 'darkgray' }}>
+                                <TableCell align="left" style={{ borderBottom: "none", color: 'black' }}>
                                     {/* <IconButton>
                                         <img id={`img${row.image}`} src={`http://localhost:8000/${row.image}`} alt={`pic of ${row.image}`} style={{ width: 30, height: 30, borderRadius: '50%' }} />
                                     </IconButton> */}
@@ -154,7 +154,7 @@ export default function CompanyDetails() {
                                 {/* <TableCell align="left" style={{ borderBottom: "none" }}>{row.idNumber}</TableCell>
                                 <TableCell align="left" style={{ borderBottom: "none" }}>{row.operationalArea}</TableCell>
                                 <TableCell width={1} align="left" style={{ cursor: 'pointer', borderBottom: "none" }} ><IconButton ><EditIcon style={{ color: '#00dff1' }} /></IconButton></TableCell> */}
-                                <TableCell align="left" style={{ borderBottom: "none", color: 'darkgray' }} >
+                                <TableCell align="left" style={{ borderBottom: "none", color: 'black' }} >
                                     {row.description}
 
                                 </TableCell>

@@ -80,6 +80,10 @@ const staffSchema = new mongoose.Schema({
     designation: {
         type: String
     },
+    Avg_Score: {
+        type : Number,
+        default:0
+    } ,
     checkedIn: {
         type: String,
         default: 'Not Checked in'

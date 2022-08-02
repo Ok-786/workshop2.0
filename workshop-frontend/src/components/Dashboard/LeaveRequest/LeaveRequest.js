@@ -64,7 +64,7 @@ export default function LeaveRequest() {
                     </Typography>
                 </div>
                 <div>
-                    <IconButton  style={{ width: '25px', height: '25px', marginRight: '10px' }}>{<Add style={{ color: 'gray' }} />}</IconButton>
+                    <IconButton  style={{ width: '25px', height: '25px', marginRight: '10px' }}>{<Add style={{ color: 'black' }} />}</IconButton>
                     <IconButton style={{ width: '25px', height: '25px' }}>{<SettingsBackupRestoreIcon style={{ color: '#6792ef' }} />}</IconButton>
                 </div>
             </div>
@@ -72,7 +72,7 @@ export default function LeaveRequest() {
             {!check &&
                 <div style={{ justifyContent: 'center', marginTop: '5&', alignItems: 'center', textAlign: 'center' }}>
                     <DraftsIcon style={{ color: 'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }} />
-                    <p style={{ color: 'darkgray' }}>No Pending Leave Requests</p>
+                    <p style={{ color: 'black' }}>No Pending Leave Requests</p>
                 </div>
             }
             <div style={{}}>
@@ -90,8 +90,8 @@ export default function LeaveRequest() {
                                     {!check && setCheck(true)}
 
                                     {/* <TableCell width="10%" style={{ color: 'blue' }} component="th" scope="row" id={`id${row.id}`}>{index}</TableCell> */}
-                                    <TableCell width="10%" style={{ borderBottom: "none", color: 'darkgray' }} align="left" id={`fn${row.id}`}>{row.firstName + " " + row.lastName}</TableCell>
-                                    <TableCell width="10%" style={{ borderBottom: "none", color: 'darkgray' }} align="left" id={`fn${row.id}`}>{row.timeoffLeaves}</TableCell>
+                                    <TableCell width="10%" style={{ borderBottom: "none", color: 'black' }} align="left" id={`fn${row.id}`}>{row.firstName + " " + row.lastName}</TableCell>
+                                    <TableCell width="10%" style={{ borderBottom: "none", color: 'black' }} align="left" id={`fn${row.id}`}>{row.timeoffLeaves}</TableCell>
                                     {/* <TableCell width="10%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}>{row.timeoffDescription}</TableCell> */}
                                     {/* <TableCell width="1%" style={{ borderBottom: "none", color: 'blue', }} align="left" id={`fn${row.id}`}>{row.status}</TableCell> */}
                                     {/* <TableCell width="10%" style={{ borderBottom: "none" }} align="left" id={`fn${row.id}`}><ProgressBar progress={row.timeoffCompleted} /></TableCell> */}

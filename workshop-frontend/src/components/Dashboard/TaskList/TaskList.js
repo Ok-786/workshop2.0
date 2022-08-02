@@ -74,7 +74,7 @@ export default function TaskList() {
             {!check &&
                 <div style={{ justifyContent: 'center', marginBlockStart: '10%', alignItems: 'center', textAlign: 'center' }}>
                     <AllInboxIcon style={{ color: 'rgba(4, 197, 232, .3)', width: '70px', height: '70px' }} />
-                    <p style={{ color: 'darkgray' }}>No Pending Tasks</p>
+                    <p style={{ color: 'black' }}>No Pending Tasks</p>
                 </div>
             }
 
@@ -98,9 +98,9 @@ export default function TaskList() {
                                             <TableRow key={r.firstName + r.lastName} style={{ color: '#80a4f1' }}>
                                                 {!check && setCheck(true)}
                                                 <TableCell align="left" style={{ borderBottom: "none" }}>
-                                                    <div style={{ color: 'darkgray' }}>&nbsp;&nbsp;&nbsp;&nbsp;{row.name}</div>
+                                                    <div style={{ color: 'black' }}>&nbsp;&nbsp;&nbsp;&nbsp;{row.name}</div>
                                                 </TableCell>
-                                                <TableCell align="center" style={{ borderBottom: "none", color: 'darkgray' }}>{row.dueDate && row.dueDate.split('T')[0]}</TableCell>
+                                                <TableCell align="center" style={{ borderBottom: "none", color: 'black' }}>{row.dueDate && row.dueDate.split('T')[0]}</TableCell>
 
                                             </TableRow>
                                         }
